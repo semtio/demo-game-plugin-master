@@ -20,6 +20,8 @@
     background-size: cover;
     background-position: center;
     overflow: hidden;
+
+    border-radius: 1rem;
 }
 
 #preview::before {

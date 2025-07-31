@@ -85,80 +85,52 @@ function crb_attach_plugin_options()
     Container::make('theme_options', 'Таблица')
         ->set_page_parent('crb_demo_game')
         ->add_fields([
-            Field::make('separator', 'crb_separator1', __('CSS стили карточек')),
+            Field::make('separator', 'css_1', __('Стили')),
             // CSS стили карточек
-            Field::make('color', 'table_bkg_color', __('Фон карточек (table_bkg_color)'))
-                ->set_width(30)
+            Field::make('color', 'casino_table_text_1', __('Цвет текста (casino_table_text_1)'))
+                ->set_width(10)
                 ->set_default_value('#ffffff')
                 ->set_palette(array('#ffffff')),
 
-            Field::make('color', 'table_text_color', __('Цвет текста карточек(table_text_color)'))
-                ->set_width(30)
-                ->set_default_value('#333333')
-                ->set_palette(array('#333333')),
+            Field::make('color', 'casino_table_col_btn_1', __('1ый Градиент кнопки (casino_table_col_btn_1)'))
+                ->set_width(10)
+                ->set_default_value('#40e06f')
+                ->set_palette(array('#40e06f')),
 
-            Field::make('color', 'table_bonus_bg_color', __('Welcome Bonus BG(table_bonus_bg_color)'))
-                ->set_width(30)
-                ->set_default_value('#FF7037')
-                ->set_palette(array('#FF7037')),
+            Field::make('color', 'casino_table_col_btn_2', __('2ой Градиент кнопки(casino_table_col_btn_2)'))
+                ->set_width(10)
+                ->set_default_value('#5df88f')
+                ->set_palette(array('#5df88f')),
 
-            Field::make('color', 'table_bonus_text_color', __('Цвет текста кнопок(table_bonus_text_color)'))
-                ->set_width(30)
-                ->set_default_value('#ffffff')
-                ->set_palette(array('#ffffff')),
+            Field::make('color', 'casino_table_bg_col', __('Фон карточек списка (casino_table_bg_col)'))
+                ->set_width(10)
+                ->set_default_value('#1B2C5F')
+                ->set_palette(array('#1B2C5F')),
 
-            Field::make('color', 'table_btn_gradient_1', __('Градиент кнопки 1(table_btn_gradient_1)'))
-                ->set_width(30)
-                ->set_default_value('#2c5aa0')
-                ->set_palette(array('#2c5aa0')),
+            Field::make('color', 'casino_table_outline', __('Обводка / Нумерация (casino_table_outline)'))
+                ->set_width(10)
+                ->set_default_value('#A340FB')
+                ->set_palette(array('#A340FB')),
 
-            Field::make('color', 'table_btn_gradient_2', __('Градиент кнопки 2(table_btn_gradient_2)'))
-                ->set_width(30)
-                ->set_default_value('#1e3a5f')
-                ->set_palette(array('#1e3a5f')),
 
             Field::make('separator', 'crb_separator2', __('Таблица казино')),
             // Цикл 
             Field::make('complex', 'complex_table', __('table'))
                 ->add_fields([
                     // Логотип
-                    Field::make('image', 'logo_table', __('Логотип (logo_table)'))
+                    Field::make('image', 'casino_table_logo', __('Логотип (casino_table_logo)'))
                         ->set_value_type('url'),
+                    Field::make('text', 'casino_name', __('Имя казино (casino_name)'))
+                        ->set_width(25),
+                    Field::make('text', 'table_info_tag', __('Инфо заг. (table_info_tag)'))
+                        ->set_width(25),
+                    Field::make('text', 'table_info_descr', __('Инфо описание (table_info_descr)'))
+                        ->set_width(25),
+                    Field::make('text', 'table_cta_btn', __('Кнопка (table_cta_btn)'))
+                        ->set_width(25),
+                    Field::make('text', 'table_link_to_casino', __('Ссылка на казино (table_link_to_casino)'))
+                        ->set_width(25),
 
-                    // Инфо заголовок
-                    Field::make('text', 'text_title', __('Заголовок (text_title)'))
-                        ->set_default_value('Casino name'),
-
-                    // Инфо список
-                    Field::make('text', 'info_1', __('Инфо 1 (info_1)'))
-                        ->set_default_value('Licensed and regulated gaming')
-                        // ->help_text('Licensed and regulated gaming')
-                        ->set_width(33),
-                    Field::make('text', 'info_2', __('Инфо 2 (info_2)'))
-                        ->set_default_value('24/7 customer support available')
-                        // ->help_text('24/7 customer support available')
-                        ->set_width(33),
-                    Field::make('text', 'info_3', __('Инфо 3 (info_3)'))
-                        ->set_default_value('Fast and secure payment processing')
-                        // ->help_text('Fast and secure payment processing')
-                        ->set_width(33),
-
-                    // Кнопки бонус и перейти
-                    Field::make('text', 'bonus_1', __('Бонус $ (bonus_1)'))
-                        ->set_default_value('$500')
-                        ->set_width(50),
-                    Field::make('text', 'bonus_2', __('Welcome Бонус(bonus_2)'))
-                        ->set_default_value('Welcome Bonus + 100 Free Spins')
-                        // ->help_text('Welcome Bonus + 100 Free Spins')
-                        ->set_width(50),
-
-                    Field::make('text', 'go_to_btn', __('Имя кнопки перейти (go_to_btn)'))
-                        ->set_default_value('Play Now')
-                        ->set_width(50),
-                    Field::make('text', 'go_to_btn_link', __('Бонус (go_to_btn_link)'))
-                        ->set_default_value('https://example.com/')
-                        // ->help_text('https://example.com/')
-                        ->set_width(50)
                 ])->set_collapsed(true), // true для развёрнуто всегда
         ]);
 }
