@@ -37,7 +37,6 @@ $color_font_2 = carbon_get_theme_option('color_font_2');
     </button>
 </div>
 
-
 <script>
     (() => {
         'use strict';
@@ -59,7 +58,6 @@ $color_font_2 = carbon_get_theme_option('color_font_2');
                 iframe.src = DEMO_URL;
                 iframe.style.height = '<?php echo $height_for; ?>px';
                 iframe.style.background = "#000000";
-                iframe.style.backgroundImage = '';
                 iframe.allowFullscreen = true;
                 iframe.loading = 'lazy';
                 demoContainer.appendChild(iframe);

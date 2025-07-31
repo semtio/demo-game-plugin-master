@@ -85,7 +85,40 @@ function crb_attach_plugin_options()
     Container::make('theme_options', 'Таблица')
         ->set_page_parent('crb_demo_game')
         ->add_fields([
-            // Цыкл 
+            Field::make('separator', 'crb_separator1', __('CSS стили карточек')),
+            // CSS стили карточек
+            Field::make('color', 'table_bkg_color', __('Фон карточек (table_bkg_color)'))
+                ->set_width(30)
+                ->set_default_value('#ffffff')
+                ->set_palette(array('#ffffff')),
+
+            Field::make('color', 'table_text_color', __('Цвет текста карточек(table_text_color)'))
+                ->set_width(30)
+                ->set_default_value('#333333')
+                ->set_palette(array('#333333')),
+
+            Field::make('color', 'table_bonus_bg_color', __('Welcome Bonus BG(table_bonus_bg_color)'))
+                ->set_width(30)
+                ->set_default_value('#FF7037')
+                ->set_palette(array('#FF7037')),
+
+            Field::make('color', 'table_bonus_text_color', __('Цвет текста кнопок(table_bonus_text_color)'))
+                ->set_width(30)
+                ->set_default_value('#ffffff')
+                ->set_palette(array('#ffffff')),
+
+            Field::make('color', 'table_btn_gradient_1', __('Градиент кнопки 1(table_btn_gradient_1)'))
+                ->set_width(30)
+                ->set_default_value('#2c5aa0')
+                ->set_palette(array('#2c5aa0')),
+
+            Field::make('color', 'table_btn_gradient_2', __('Градиент кнопки 2(table_btn_gradient_2)'))
+                ->set_width(30)
+                ->set_default_value('#1e3a5f')
+                ->set_palette(array('#1e3a5f')),
+
+            Field::make('separator', 'crb_separator2', __('Таблица казино')),
+            // Цикл 
             Field::make('complex', 'complex_table', __('table'))
                 ->add_fields([
                     // Логотип
@@ -125,8 +158,8 @@ function crb_attach_plugin_options()
                     Field::make('text', 'go_to_btn_link', __('Бонус (go_to_btn_link)'))
                         ->set_default_value('https://example.com/')
                         // ->help_text('https://example.com/')
-                        ->set_width(50),
-                ])
+                        ->set_width(50)
+                ])->set_collapsed(true), // true для развёрнуто всегда
         ]);
 }
 

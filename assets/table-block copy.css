@@ -1,44 +1,18 @@
-/* ============================
-   Casino Card Plugin Styles
-   (scoped – no global * or body)
-   ============================ */
-
-
-
-/* 1. Scope reset & typography  */
-.casino-container,
-.casino-container * {
+/* General Styles */
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-.casino-container {
+body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    /* background-color: #f8f9fa; */
-    /* padding: 2rem; */
-    max-width: 1200px;
-    margin: 0 auto 2rem;
+    background-color: #f8f9fa;
+    padding: 2rem;
 }
 
-.counter-rating-casino {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 900;
-
-    position: absolute;
-    z-index: 999;
-
-    width: 30px;
-    height: 30px;
-    color: #ffffff;
-    background-color: #FF7037;
-    border-radius: 0 0 50%;
-}
-
-/* 2. Main Casino Card Container */
+/* Main Casino Card Container */
 .casino-card {
     display: flex;
     align-items: stretch;
@@ -48,7 +22,8 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
     gap: 1.5rem;
-    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
@@ -57,8 +32,8 @@
     transform: translateY(-2px);
 }
 
-/* 3. Logo Section */
-.affiliate-casino-logo {
+/* Logo Section */
+.logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +47,7 @@
     background-size: cover;
 }
 
-/* 4. Casino Info Section */
+/* Casino Info Section */
 .casino-info {
     flex: 1;
     display: flex;
@@ -84,11 +59,11 @@
 .casino-info h2 {
     font-size: 1.5em;
     font-weight: 700;
-    /* color: #333; */
+    color: #333;
     margin-bottom: 0.5rem;
 }
 
-/* 5. Casino Rating */
+/* Casino Rating */
 .casino-rating {
     display: flex;
     align-items: center;
@@ -106,11 +81,11 @@
     color: #ddd;
 }
 
-/* 6. Casino Notes List */
+/* Casino Notes List */
 .casino-notes {
     list-style-type: disc;
     padding-left: 1.5rem;
-    /* color: #666; */
+    color: #666;
 }
 
 .casino-notes li {
@@ -120,34 +95,40 @@
 }
 
 .casino-notes li::marker {
-    /* color: #2c5aa0; */
+    color: #2c5aa0;
 }
 
-/* 7. Casino Side Section */
+/* Casino Side Section */
 .casino-side {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     min-width: 180px;
     padding: 1rem;
     gap: 1.5rem;
 }
 
-/* 7on: fixed widths for bonus & button */
+/*start 7on*/
 .bonus,
 .play-btn {
     width: 250px;
+
 }
 
-/* 8. Bonus Section */
+/*end 7on*/
+
+/* Bonus Section */
 .bonus {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* width: 100%; 7on */
     height: 100%;
     padding: 1rem;
-    /* background: linear-gradient(135deg, #ff6b35, #ff8c42); */
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
     color: #ffffff;
     border-radius: 12px;
     font-weight: 600;
@@ -162,9 +143,9 @@
     margin-bottom: 0.25rem;
 }
 
-/* 9. Play Button */
+/* Play Button */
 .play-btn {
-    /* background: linear-gradient(135deg, #2c5aa0, #1e3a5f); */
+    background: linear-gradient(135deg, #2c5aa0, #1e3a5f);
     color: #ffffff;
     border: none;
     padding: 1rem 2rem;
@@ -180,11 +161,9 @@
 }
 
 .play-btn:hover {
-    /* background: linear-gradient(135deg, #1e3a5f, #2c5aa0); */
+    background: linear-gradient(135deg, #1e3a5f, #2c5aa0);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(44, 90, 160, 0.4);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.3);
 }
 
 .play-btn:active {
@@ -198,12 +177,12 @@
 }
 
 button {
-    /* width: 100%; */
+    width: 100%;
 }
 
-/* 10. Responsive Design */
+/* Responsive Design - Mobile First Approach */
 @media (max-width: 768px) {
-    .casino-container {
+    body {
         padding: 1rem;
     }
 
@@ -214,7 +193,7 @@ button {
         gap: 1rem;
     }
 
-    .affiliate-casino-logo {
+    .logo {
         width: 100%;
         height: 300px;
         min-width: auto;
@@ -231,7 +210,9 @@ button {
 
     .casino-side {
         order: 3;
+        justify-content: space-around;
         align-items: center;
+        min-width: auto;
         width: 100%;
         padding: 1rem 0;
     }
@@ -242,6 +223,7 @@ button {
     }
 
     .play-btn {
+        flex: 0 0 auto;
         min-width: 100px;
     }
 
@@ -251,6 +233,7 @@ button {
     }
 }
 
+/* Extra small screens */
 @media (max-width: 480px) {
     .casino-side {
         flex-direction: column;
@@ -267,7 +250,14 @@ button {
     }
 }
 
-/* 11. Spacing between multiple cards (kept after reset) */
+/* Container for multiple cards */
+.casino-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+/* Spacing between multiple cards */
 .casino-card+.casino-card {
     margin-top: 2rem;
 }
