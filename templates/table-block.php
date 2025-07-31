@@ -1,52 +1,41 @@
 <?php
 $table_bkg_color = carbon_get_theme_option('table_bkg_color');
-$table_text_color = carbon_get_theme_option('table_text_color');
-$table_btn_color = carbon_get_theme_option('table_btn_color');
-$table_bonus_bg_color = carbon_get_theme_option('table_bonus_bg_color');
-$table_btn_gradient_1 = carbon_get_theme_option('table_btn_gradient_1');
-$table_btn_gradient_2 = carbon_get_theme_option('table_btn_gradient_2');
 ?>
 
-<?php
-$complex_table = carbon_get_theme_option('complex_table');
-foreach ($complex_table as $i) { ?>
+<div class="saintsmedia-casino-table">
+    <!-- card -->
+    <div class="saintsmedia-casino-card saintsmedia-casino-card--primary">
+        <!-- logo -->
+        <div class="saintsmedia-logo" style="background-image: url('1.png');" aria-label="Vicibet logo">
+            <div class="saintsmedia-order-number">1</div>
+        </div>
 
-    <div class="casino-container">
-        <div style="background-color:<?php echo $table_bkg_color; ?>;" class="casino-card">
-            <div class="counter-rating-casino">5</div>
-            <!-- Casino Card 1 -->
-            <div style="background-image: url('<?php echo $i['logo_table']; ?>');" class="affiliate-casino-logo"></div>
-            <div style="color: <?php echo $table_text_color; ?>;" class="casino-info">
-                <h2><?php echo $i['text_title']; ?></h2>
-                <div style="width: 50%; display: flex; justify-content: space-between;" class="casino-rating">
-                    <div>
-                        <span style="font-size: 2.5rem;" class="star">★</span>
-                        <span style="font-size: 2.5rem;" class="star">★</span>
-                        <span style="font-size: 2.5rem;" class="star">★</span>
-                        <span style="font-size: 2.5rem;" class="star">★</span>
-                        <span style="font-size: 2.5rem;" class="star">★</span>
-                        <!-- <span style="font-size: 2.5rem;" class="star">☆</span> -->
-                    </div>
+        <!-- casino name -->
+        <div class="saintsmedia-casino-name">VICIBET</div>
 
-                    <span>3.6</span>
-
-                </div>
-                <ul class="casino-notes">
-                    <li><?php echo $i['info_1']; ?></li>
-                    <li><?php echo $i['info_2']; ?></li>
-                    <li><?php echo $i['info_3']; ?></li>
-                </ul>
-            </div>
-
-            <div class="casino-side">
-                <div style="background-color:<?php echo $table_bonus_bg_color; ?>;" class="bonus">
-                    <span class="bonus-amount"><?php echo $i['bonus_1']; ?></span>
-                    <?php echo $i['bonus_2']; ?>
-                </div>
-                <a href="<?php echo $i['go_to_btn_link']; ?>"> <button style="background: linear-gradient(135deg,<?php echo $table_btn_gradient_1; ?>,<?php echo $table_btn_gradient_2; ?>);" class="play-btn" type="button"><?php echo $i['go_to_btn']; ?> </button>
-                </a>
+        <!-- info -->
+        <div class="saintsmedia-info">
+            <div class="saintsmedia-info-tag">Bonus de bienvenida</div>
+            <div class="saintsmedia-info-descr">
+                325% hasta 3 000 € + 300 tiradas gratis + 1 Bonus Crab
             </div>
         </div>
-    </div>
 
-<?php } ?>
+        <!-- rating -->
+        <div class="saintsmedia-rating" aria-label="Rating 5 out of 5">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <span>5.0</span>
+        </div>
+
+        <!-- CTA -->
+        <div class="saintsmedia-cta">
+            <a href="#" target="_blank" rel="nofollow noopener noreferrer">
+                Play <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
