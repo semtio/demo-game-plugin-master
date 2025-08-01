@@ -99,9 +99,5 @@ foreach ($complex_table as $i) {
         valueSpan.style.marginLeft = '6px';
         container.appendChild(valueSpan);
     });
-
-
     // конец - Рейтинг и звёздочки
 </script>
-
-<!-- <i class="fa-solid fa-star"></i> -->
