@@ -107,7 +107,7 @@ function crb_attach_plugin_options()
                 ->set_default_value('#1B2C5F')
                 ->set_palette(array('#1B2C5F')),
 
-            Field::make('color', 'casino_table_outline', __('Обводка / Нумерация (casino_table_outline)'))
+            Field::make('color', 'casino_table_outline', __('Обводка + Нумерация (casino_table_outline)'))
                 ->set_width(10)
                 ->set_default_value('#A340FB')
                 ->set_palette(array('#A340FB')),
@@ -130,6 +130,12 @@ function crb_attach_plugin_options()
                         ->set_width(25),
                     Field::make('text', 'table_link_to_casino', __('Ссылка на казино (table_link_to_casino)'))
                         ->set_width(25),
+                    Field::make('text', 'table_rating_casino', __('Рейтинг казино указывается дробно 5.0 (table_rating_casino)'))
+                        ->set_width(25)
+                        ->set_attribute('type', 'number')
+                        ->set_attribute('step', '0.1')
+                        ->set_attribute('min', '1')
+                        ->set_attribute('max', '5')
 
                 ])->set_collapsed(true), // true для развёрнуто всегда
         ]);

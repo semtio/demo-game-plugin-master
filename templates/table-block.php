@@ -38,12 +38,9 @@ foreach ($complex_table as $i) {
 
             <!-- rating -->
             <div class="saintsmedia-rating" aria-label="Rating 5 out of 5">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <span>5.0</span>
+
+
+                <span class="what-is-rating"><?php echo $i['table_rating_casino']; ?></span>
             </div>
 
             <!-- CTA -->
@@ -66,7 +63,45 @@ foreach ($complex_table as $i) {
     }
     // конец - нумерация карточек
 
-    // --------------------------
+    // добавляем обводку первому элементу
     let totalTables = document.querySelectorAll('.saintsmedia-casino-card--primary');
     totalTables[0].style.outline = '3.8px solid <?php echo $casino_table_outline; ?>';
+    // конец - добавляем обводку первому элементу
+
+    // Рейтинг и звёздочки
+    let whatIsRating = document.querySelectorAll('.what-is-rating');
+    let blockWithStars = document.querySelectorAll('.saintsmedia-rating');
+
+    whatIsRating.forEach((el, index) => {
+        let ratingValue = parseFloat(el.textContent);
+        const starCount = Math.floor(ratingValue);
+        const hasHalf = ratingValue % 1 >= 0.5;
+        const container = blockWithStars[index];
+
+        // Удаляем числовой текст
+        el.remove();
+
+        for (let i = 0; i < 5; i++) {
+            const star = document.createElement('i');
+            if (i < starCount) {
+                star.className = 'fa-solid fa-star';
+            } else if (i === starCount && hasHalf) {
+                star.className = 'fa-solid fa-star-half-stroke';
+            } else {
+                star.className = 'fa-regular fa-star';
+            }
+            container.appendChild(star);
+        }
+
+        // Добавим числовое значение справа
+        const valueSpan = document.createElement('span');
+        valueSpan.textContent = ratingValue.toFixed(1);
+        valueSpan.style.marginLeft = '6px';
+        container.appendChild(valueSpan);
+    });
+
+
+    // конец - Рейтинг и звёздочки
 </script>
+
+<!-- <i class="fa-solid fa-star"></i> -->
