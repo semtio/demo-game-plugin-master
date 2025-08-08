@@ -2,10 +2,13 @@
 // --------------------------------------------------
 //  Глобальные цвета из настроек темы
 // --------------------------------------------------
+$casino_table_text_1 = carbon_get_theme_option('casino_table_text_1');
+$casino_table_col_btn_1 = carbon_get_theme_option('casino_table_col_btn_1');
+$casino_table_col_btn_2 = carbon_get_theme_option('casino_table_col_btn_2');
+
 $casino_table_bg_col     = carbon_get_theme_option('casino_table_bg_col');
 $casino_table_outline    = carbon_get_theme_option('casino_table_outline');
 $casino_table_text_color = carbon_get_theme_option('casino_table_text_color');
-
 // --------------------------------------------------
 //  Комплексное поле с карточками казино
 // --------------------------------------------------
@@ -19,13 +22,12 @@ if (! empty($complex_table)) :
         //--------------------------------------------------------------------
         $logo_attr = saintsmedia_responsive_bg($i['casino_table_logo'], 'saintsmedia-logo', 'medium_large');
 ?>
-
         <div class="saintsmedia-wrapper">
             <div class="saintsmedia-casino-table">
 
                 <!-- card -->
                 <div class="saintsmedia-casino-card saintsmedia-casino-card--primary"
-                    style="background-color:<?php echo esc_attr($casino_table_bg_col); ?>;">
+                    style="background-color:<?php echo esc_attr($casino_table_bg_col); ?>; color:<?php echo $casino_table_text_1; ?>;">
 
                     <!-- logo -->
                     <a href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
@@ -58,7 +60,7 @@ if (! empty($complex_table)) :
 
                     <!-- CTA -->
                     <div class="saintsmedia-cta">
-                        <a href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
+                        <a style="background: linear-gradient(90deg, <?php echo $casino_table_col_btn_1; ?> 0%, <?php echo $casino_table_col_btn_2; ?> 100%);" href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
                             <?php echo esc_html($i['table_cta_btn']); ?> <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
