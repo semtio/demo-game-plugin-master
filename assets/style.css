@@ -71,6 +71,10 @@
     max-width: 15rem;
 }
 
+.saintsmedia-buttons a:hover {
+    filter: brightness(1.5);
+}
+
 .saintsmedia-btn {
     display: inline-block;
     width: 80vw;
@@ -88,7 +92,6 @@
 }
 
 .saintsmedia-btn.saintsmedia-play {
-    /* max-width: 15rem; */
     font-size: var(--btn-font);
 }
 
