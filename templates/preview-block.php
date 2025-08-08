@@ -21,13 +21,13 @@ $color_font_2    = carbon_get_theme_option('color_font_2');
     <main id="saintsmedia-preview" <?php echo saintsmedia_responsive_bg($blur_img); ?> style="height:100%;">
         <div class="saintsmedia-buttons">
             <a id="saintsmedia-btn-play" class="saintsmedia-btn saintsmedia-play"
-                style="background:linear-gradient(135deg, <?php echo $btn_color_1; ?> 0%, <?php echo $btn_color_2; ?> 100%); color:<?php echo $color_font_1; ?>; width:80vw; max-width:20rem;"
+                style="background:linear-gradient(135deg, <?php echo $btn_color_1; ?> 0%, <?php echo $btn_color_2; ?> 100%); color:<?php echo $color_font_1; ?>;"
                 href="<?php echo $btn_to_go_link; ?>" rel="nofollow noopener noreferrer" target="_blank">
                 <?php echo $btn_to_go ?: 'JUGAR EN AL CASINO'; ?>
             </a>
 
             <button id="saintsmedia-btn-demo" class="saintsmedia-btn saintsmedia-demo"
-                style="background:linear-gradient(135deg, <?php echo $btn_color_3; ?> 0%, <?php echo $btn_color_4; ?> 100%); color:<?php echo $color_font_2; ?>; width:80vw;max-width:20rem;"
+                style="background:linear-gradient(135deg, <?php echo $btn_color_3; ?> 0%, <?php echo $btn_color_4; ?> 100%); color:<?php echo $color_font_2; ?>;"
                 type="button">
                 <?php echo $btn_iframe ?: 'DEMO'; ?>
             </button>
@@ -55,6 +55,7 @@ $color_font_2    = carbon_get_theme_option('color_font_2');
         btnDemo.addEventListener('click', () => {
             preview.classList.add('saintsmedia-hidden');
             demoContainer.classList.remove('saintsmedia-hidden');
+            // demoContainer.style.boxShadow = '0 0.2rem 0.5rem rgb(0 0 0 / 50%)';
         });
 
         btnBack.addEventListener('click', () => {

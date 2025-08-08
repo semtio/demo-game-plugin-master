@@ -41,9 +41,9 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
             <p class="saintsmedia-author-description" style="color:<?php echo esc_attr($spec_exp_main_color_text); ?>;">
                 <?php echo esc_html($spec_exp_author_info); ?>
             </p>
-            <div class="saintsmedia-author-contact">
+            <!-- <div class="saintsmedia-author-contact">
                 <a href="mailto:hannah@example.com" aria-label="Email Hannah"><i class="fa-solid fa-envelope"></i></a>
-            </div>
+            </div> -->
         </div>
     </section>
 </div>
