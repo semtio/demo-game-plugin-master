@@ -16,9 +16,24 @@ function crb_attach_plugin_options()
         ->set_page_menu_title('Шорткоды')
         ->set_page_file('crb_demo_game')
         ->add_fields([Field::make('html', 'demo_info_block')->set_html('
-            <h3>Demo: [game_preview]</h3>
-            <h3>Таблица: [table_block]</h3>
-            <h3>Експерт: [expert_author]</h3>
+            <style>
+                 .saintsmedia-dedicated{
+                    color: #fff;
+                    background: #727272ff;
+                    padding: 0.25rem 0.5rem ;
+                 }
+            </style>
+            <h3>Шорткоды на плагин DTE:</h3> 
+            <h3>Demo: <b class="saintsmedia-dedicated">[game_preview]</b></h3>
+            <h3>Таблица: <b class="saintsmedia-dedicated">[table_block]</b></h3>
+            <h3>Експерт: <b class="saintsmedia-dedicated">[expert_author]</b></h3>
+
+            <br>
+            <hr>
+            <h3>Установка:</h3> 
+            <h3>Плагин DTE: <b class="saintsmedia-dedicated">semtio/demo-game-plugin-master</b></h3> 
+            <h3>Тема: <b class="saintsmedia-dedicated">semtio/saintsmedia-theme</b></h3> 
+
         ')]);
 
     // ----------------------------------------------
