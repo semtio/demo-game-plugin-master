@@ -1,11 +1,21 @@
 <?php
-// Получаем данные (предполагается что это массив повторителя Carbon Fields)
-$complex_accordion = carbon_get_theme_option('complex_accordion');
-
-
+// Новая логика: берём один textarea (accordion_hesh_tags) и разбиваем по строкам.
+$textarea_raw = carbon_get_theme_option('accordion_hesh_tags');
+$items = [];
+if (!empty($textarea_raw)) {
+    // Разделяем по переводам строк (Windows/Unix) и чистим
+    $lines = preg_split('/\r?\n/', $textarea_raw);
+    if (is_array($lines)) {
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '') continue;
+            $items[] = $line; // Сырые строки; ниже экранируем
+        }
+    }
+}
 ?>
 
-<?php if (!empty($complex_accordion) && is_array($complex_accordion)) : ?>
+<?php if (!empty($items)) : ?>
     <div style="color: #000;" class="saintsmedia-accordion" id="saintsmedia-accordion">
         <button class="saintsmedia-accordion-toggle" type="button" aria-expanded="false" aria-controls="saintsmedia-accordion-panel">
             <span class="saintsmedia-accordion-toggle-left">
@@ -18,13 +28,10 @@ $complex_accordion = carbon_get_theme_option('complex_accordion');
         </button>
         <div class="saintsmedia-accordion-panel" id="saintsmedia-accordion-panel" hidden>
             <div class="saintsmedia-accordion-items">
-                <?php foreach ($complex_accordion as $i) :
-                    if (empty($i['accordion_hesh_tags'])) continue;
-                    $tag_text = wp_kses_post($i['accordion_hesh_tags']); // допускаем безопасный HTML (если это нужно), иначе esc_html
-                ?>
+                <?php foreach ($items as $tag_line) : ?>
                     <h2 class="saintsmedia-accordion-item">
-                        <i class="fa-solid fa-plus"></i>
-                        <span class="saintsmedia-accordion-item-text"><?php echo $tag_text; ?></span>
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        <span class="saintsmedia-accordion-item-text"><?php echo esc_html($tag_line); ?></span>
                     </h2>
                 <?php endforeach; ?>
             </div>

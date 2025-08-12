@@ -228,11 +228,9 @@ function crb_attach_plugin_options()
     Container::make('theme_options', 'Аккордеон')
         ->set_page_parent('crb_demo_game')
         ->add_fields([
-            Field::make('complex', 'complex_accordion', __('Хештеги аккордиона'))
-                ->add_fields([
-                    Field::make('text', 'accordion_hesh_tags', __('Хештег'))
-                        ->set_width(33)
-                ])->set_collapsed(true) // true для развёрнуто всегда
+            Field::make('textarea', 'accordion_hesh_tags', __('Писать каждый тег с новой строки'))
+                ->set_rows(4)
+                ->set_width(66)
         ]);
 }
 
