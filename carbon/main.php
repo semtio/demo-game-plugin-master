@@ -205,7 +205,6 @@ function crb_attach_plugin_options()
             Field::make('text', 'spec_exp_author_info', __('Инфо автора (spec_exp_author_info)'))
                 ->set_width(25),
 
-
             Field::make('separator', 'spec_exp_author_social_network', __('Соцсети')),
             Field::make('text', 'spec_exp_author_twitter', __('Twitter (spec_exp_author_twitter)'))
                 ->set_width(30),
@@ -219,6 +218,20 @@ function crb_attach_plugin_options()
                 ->set_width(30),
             Field::make('text', 'spec_exp_author_telegram', __('Telegram (spec_exp_author_telegram)'))
                 ->set_width(30),
+        ]);
+
+    // ----------------------------------------------
+    // ---------------- 4 Аккордеон -----------------
+    // ----------------------------------------------
+
+    Container::make('theme_options', 'Аккордеон')
+        ->set_page_parent('crb_demo_game')
+        ->add_fields([
+            Field::make('complex', 'complex_accordion', __('Хештеги аккордиона'))
+                ->add_fields([
+                    Field::make('text', 'accordion_hesh_tags', __('Хештег'))
+                        ->set_width(33)
+                ])->set_collapsed(true) // true для развёрнуто всегда
         ]);
 }
 

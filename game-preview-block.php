@@ -65,6 +65,14 @@ function gp_enqueue_assets()
         null // Можно раскомментировать filemtime
     );
 
+    // accordion.css
+    wp_enqueue_style(
+        'gp-my-accordion-css',
+        plugins_url('/assets/accordion.css', __FILE__),
+        [],
+        null // Можно раскомментировать filemtime
+    );
+
     // Скрипт приложения
     wp_enqueue_script(
         'gp-script',
@@ -99,5 +107,14 @@ function casino_expert__short()
 {
     ob_start();
     include plugin_dir_path(__FILE__) . 'templates/casino-expert.php';
+    return ob_get_clean();
+}
+
+// Шорткод для accordion 
+add_shortcode('saintsmedia_accordion', 'saintsmedia_accordion');
+function saintsmedia_accordion()
+{
+    ob_start();
+    include plugin_dir_path(__FILE__) . 'templates/accordion.php';
     return ob_get_clean();
 }
