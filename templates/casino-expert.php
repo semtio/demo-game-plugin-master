@@ -10,6 +10,12 @@ $spec_exp_author_photo     = carbon_get_theme_option('spec_exp_author_photo'); /
 $spec_exp_h2_title         = carbon_get_theme_option('spec_exp_h2_title');
 $spec_exp_author_name      = carbon_get_theme_option('spec_exp_author_name');
 $spec_exp_author_info      = carbon_get_theme_option('spec_exp_author_info');
+$spec_exp_author_twitter   = carbon_get_theme_option('spec_exp_author_twitter');
+$spec_exp_author_linkedin   = carbon_get_theme_option('spec_exp_author_linkedin');
+$spec_exp_author_facebook   = carbon_get_theme_option('spec_exp_author_facebook');
+$spec_exp_author_instagram   = carbon_get_theme_option('spec_exp_author_instagram');
+$spec_exp_author_youtube   = carbon_get_theme_option('spec_exp_author_youtube');
+$spec_exp_author_telegram   = carbon_get_theme_option('spec_exp_author_telegram');
 
 // --------------------------------------------------
 //  Подготовка фото автора через saintsmedia_responsive_bg()
@@ -41,9 +47,14 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
             <p class="saintsmedia-author-description" style="color:<?php echo esc_attr($spec_exp_main_color_text); ?>;">
                 <?php echo esc_html($spec_exp_author_info); ?>
             </p>
-            <!-- <div class="saintsmedia-author-contact">
-                <a href="mailto:hannah@example.com" aria-label="Email Hannah"><i class="fa-solid fa-envelope"></i></a>
-            </div> -->
+            <div class="saintsmedia-author-contact">
+                <?php echo $spec_exp_author_twitter ? '<a href="' . esc_url($spec_exp_author_twitter) . '"><i class="fa-brands fa-x-twitter"></i></a>' : ''; ?>
+                <?php echo $spec_exp_author_linkedin ? '<a href="' . esc_url($spec_exp_author_linkedin) . '"><i class="fa-brands fa-linkedin-in"></i></a>' : ''; ?>
+                <?php echo !empty($spec_exp_author_facebook) ? '<a href="' . esc_url($spec_exp_author_facebook) . '"><i class="fa-brands fa-facebook-f"></i></a>' : ''; ?>
+                <?php echo !empty($spec_exp_author_instagram) ? '<a href="' . esc_url($spec_exp_author_instagram) . '"><i class="fa-brands fa-instagram"></i></a>' : ''; ?>
+                <?php echo !empty($spec_exp_author_youtube) ? '<a href="' . esc_url($spec_exp_author_youtube) . '"><i class="fa-brands fa-youtube"></i></a>' : ''; ?>
+                <?php echo !empty($spec_exp_author_telegram) ? '<a href="' . esc_url($spec_exp_author_telegram) . '"><i class="fa-brands fa-telegram"></i></a>' : ''; ?>
+            </div>
         </div>
     </section>
 </div>

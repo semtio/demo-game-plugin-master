@@ -204,6 +204,20 @@ function crb_attach_plugin_options()
                 ->set_width(25),
             Field::make('text', 'spec_exp_author_info', __('Инфо автора (spec_exp_author_info)'))
                 ->set_width(25),
+
+
+            Field::make('text', 'spec_exp_author_twitter', __('Twitter (spec_exp_author_twitter)'))
+                ->set_width(50),
+            Field::make('text', 'spec_exp_author_linkedin', __('Linkedin (spec_exp_author_linkedin)'))
+                ->set_width(50),
+            Field::make('text', 'spec_exp_author_facebook', __('Facebook (spec_exp_author_facebook)'))
+                ->set_width(50),
+            Field::make('text', 'spec_exp_author_instagram', __('Instagram (spec_exp_author_instagram)'))
+                ->set_width(50),
+            Field::make('text', 'spec_exp_author_youtube', __('Youtube (spec_exp_author_youtube)'))
+                ->set_width(50),
+            Field::make('text', 'spec_exp_author_telegram', __('Telegram (spec_exp_author_telegram)'))
+                ->set_width(50),
         ]);
 }
 
