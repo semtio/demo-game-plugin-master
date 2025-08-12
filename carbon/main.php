@@ -27,6 +27,7 @@ function crb_attach_plugin_options()
             <h3>Demo: <b class="saintsmedia-dedicated">[game_preview]</b></h3>
             <h3>Таблица: <b class="saintsmedia-dedicated">[table_block]</b></h3>
             <h3>Експерт: <b class="saintsmedia-dedicated">[expert_author]</b></h3>
+            <h3>Аккордион: <b class="saintsmedia-dedicated">[saintsmedia_accordion]</b></h3>
 
             <br>
             <hr>
