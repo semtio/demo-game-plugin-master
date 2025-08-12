@@ -49,11 +49,17 @@ if (!empty($textarea_raw)) {
         const panel = acc.querySelector('.saintsmedia-accordion-panel');
         if (!toggle || !panel) return;
 
+        // Скрываем содержимое внутри панели для плавного появления
+        const items = panel.querySelector('.saintsmedia-accordion-items');
+        if (items) {
+            items.style.opacity = '0';
+            items.style.transition = 'opacity .4s cubic-bezier(.4,0,.2,1)';
+        }
+
         const open = () => {
             panel.hidden = false;
             acc.dataset.open = 'true';
             toggle.setAttribute('aria-expanded', 'true');
-            // плавная высота
             panel.style.height = 'auto';
             const h = panel.clientHeight + 'px';
             panel.style.height = '0px';
@@ -64,11 +70,19 @@ if (!empty($textarea_raw)) {
             panel.addEventListener('transitionend', function handler() {
                 panel.style.height = 'auto';
                 panel.style.transition = '';
+                // Плавно показываем содержимое после открытия панели
+                if (items) {
+                    items.style.opacity = '1';
+                }
                 panel.removeEventListener('transitionend', handler);
             });
         };
 
         const close = () => {
+            // Плавно скрываем содержимое перед закрытием панели
+            if (items) {
+                items.style.opacity = '0';
+            }
             const h = panel.clientHeight + 'px';
             panel.style.height = h;
             requestAnimationFrame(() => {
