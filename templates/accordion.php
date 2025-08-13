@@ -53,7 +53,7 @@ if (!empty($textarea_raw)) {
         const items = panel.querySelector('.saintsmedia-accordion-items');
         if (items) {
             items.style.opacity = '0';
-            items.style.transition = 'opacity .4s cubic-bezier(.4,0,.2,1)';
+            items.style.transition = 'opacity .4s cubic-bezier(.4,0,.5,1)';
         }
 
         const open = () => {
@@ -64,7 +64,7 @@ if (!empty($textarea_raw)) {
             const h = panel.clientHeight + 'px';
             panel.style.height = '0px';
             requestAnimationFrame(() => {
-                panel.style.transition = 'height .4s cubic-bezier(.4,0,.2,1)';
+                panel.style.transition = 'height .1s cubic-bezier(.4,0,.2,1)';
                 panel.style.height = h;
             });
             panel.addEventListener('transitionend', function handler() {
@@ -86,7 +86,7 @@ if (!empty($textarea_raw)) {
             const h = panel.clientHeight + 'px';
             panel.style.height = h;
             requestAnimationFrame(() => {
-                panel.style.transition = 'height .35s cubic-bezier(.4,0,.2,1)';
+                panel.style.transition = 'height .1s cubic-bezier(.4,0,.2,1)';
                 panel.style.height = '0px';
             });
             panel.addEventListener('transitionend', function handler() {
