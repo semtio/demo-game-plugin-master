@@ -2,7 +2,7 @@
 /*
 Plugin Name: Game-Game-Game
 Plugin URI: https://yourwebsite.com/
-Description: 3in1 
+Description: 3in1
 Version: 1.2
 Author: 7on
 */
@@ -106,15 +106,56 @@ add_shortcode('expert_author', 'casino_expert__short');
 function casino_expert__short()
 {
     ob_start();
+    // Передаём контекст рендера, чтобы шаблон знал, что он вызван как шорткод
+    $render_context = 'shortcode';
     include plugin_dir_path(__FILE__) . 'templates/casino-expert.php';
     return ob_get_clean();
 }
 
-// Шорткод для accordion 
+// Шорткод для accordion
 add_shortcode('saintsmedia_accordion', 'saintsmedia_accordion');
 function saintsmedia_accordion()
 {
     ob_start();
     include plugin_dir_path(__FILE__) . 'templates/accordion.php';
     return ob_get_clean();
+}
+
+// ================= Schema JSON-LD queue/print =================
+// Хранилище для JSON-LD схем плагина (во избежание дублей)
+if (!function_exists('gp_set_expert_schema')) {
+    function gp_set_expert_schema(array $json_ld)
+    {
+        global $gp_schema_store;
+        if (!is_array($gp_schema_store)) {
+            $gp_schema_store = [
+                'expert' => null, // хранит первую валидную схему
+            ];
+        }
+        // Сохраняем только первую валидную схему за запрос
+        if (empty($gp_schema_store['expert'])) {
+            $gp_schema_store['expert'] = $json_ld;
+        }
+    }
+}
+
+if (!function_exists('gp_print_schema_in_head')) {
+    function gp_print_schema_in_head()
+    {
+        global $gp_schema_store;
+        if (empty($gp_schema_store['expert'])) {
+            return;
+        }
+        echo "\n<script type=\"application/ld+json\">";
+        // Используем wp_json_encode, если доступен
+        if (function_exists('wp_json_encode')) {
+            echo wp_json_encode($gp_schema_store['expert'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        } else {
+            echo json_encode($gp_schema_store['expert']);
+        }
+        echo "</script>\n";
+        // Выводим только один раз
+        $gp_schema_store['expert'] = null;
+    }
+    add_action('wp_head', 'gp_print_schema_in_head', 99);
 }
