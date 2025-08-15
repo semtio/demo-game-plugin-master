@@ -72,9 +72,12 @@ $author_same_as = array_filter([
         <?php if (!empty($date_modified)) : ?>
             <meta itemprop="dateModified" content="<?php echo esc_attr($date_modified); ?>" />
         <?php endif; ?>
-        <div class="saintsmedia-author-header">
+        <div class="saintsmedia-author-header" itemprop="author" itemscope itemtype="https://schema.org/Person">
             <!-- photo as adaptive background -->
             <div <?php echo $photo_attr; ?> aria-label="Author photo"></div>
+            <?php if (!empty($spec_exp_author_photo)) : ?>
+                <meta itemprop="image" content="<?php echo esc_url($spec_exp_author_photo); ?>" />
+            <?php endif; ?>
 
             <div>
                 <div class="saintsmedia-proven-specialist">
@@ -84,8 +87,11 @@ $author_same_as = array_filter([
                     </a>
                 </div>
                 <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
-                    <span><?php echo esc_html($spec_exp_author_name); ?></span>
+                    <span itemprop="name"><?php echo esc_html($spec_exp_author_name); ?></span>
                 </div>
+                <?php foreach ($author_same_as as $same_url) : ?>
+                    <meta itemprop="sameAs" content="<?php echo esc_url($same_url); ?>" />
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -103,18 +109,6 @@ $author_same_as = array_filter([
             </div>
         </div>
 
-        <!-- Hidden Person microdata (author) -->
-        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <?php if (!empty($spec_exp_author_name)) : ?>
-                <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>" />
-            <?php endif; ?>
-            <?php if (!empty($spec_exp_author_photo)) : ?>
-                <meta itemprop="image" content="<?php echo esc_url($spec_exp_author_photo); ?>" />
-            <?php endif; ?>
-            <?php foreach ($author_same_as as $same_url) : ?>
-                <link itemprop="sameAs" href="<?php echo esc_url($same_url); ?>" />
-            <?php endforeach; ?>
-        </div>
     </section>
 
     <?php
