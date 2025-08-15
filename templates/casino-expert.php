@@ -72,12 +72,9 @@ $author_same_as = array_filter([
         <?php if (!empty($date_modified)) : ?>
             <meta itemprop="dateModified" content="<?php echo esc_attr($date_modified); ?>" />
         <?php endif; ?>
-        <div class="saintsmedia-author-header" itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <div class="saintsmedia-author-header">
             <!-- photo as adaptive background -->
             <div <?php echo $photo_attr; ?> aria-label="Author photo"></div>
-            <?php if (!empty($spec_exp_author_photo)) : ?>
-                <meta itemprop="image" content="<?php echo esc_url($spec_exp_author_photo); ?>" />
-            <?php endif; ?>
 
             <div>
                 <div class="saintsmedia-proven-specialist">
@@ -87,11 +84,20 @@ $author_same_as = array_filter([
                     </a>
                 </div>
                 <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
-                    <span itemprop="name"><?php echo esc_html($spec_exp_author_name); ?></span>
+                    <span><?php echo esc_html($spec_exp_author_name); ?></span>
                 </div>
-                <?php foreach ($author_same_as as $same_url) : ?>
-                    <meta itemprop="sameAs" content="<?php echo esc_url($same_url); ?>" />
-                <?php endforeach; ?>
+                <!-- Person microdata in a dedicated visible container -->
+                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <?php if (!empty($spec_exp_author_name)) : ?>
+                        <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>" />
+                    <?php endif; ?>
+                    <?php if (!empty($spec_exp_author_photo)) : ?>
+                        <meta itemprop="image" content="<?php echo esc_url($spec_exp_author_photo); ?>" />
+                    <?php endif; ?>
+                    <?php foreach ($author_same_as as $same_url) : ?>
+                        <meta itemprop="sameAs" content="<?php echo esc_url($same_url); ?>" />
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
 
