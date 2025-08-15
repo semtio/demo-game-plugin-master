@@ -83,14 +83,8 @@ $author_same_as = array_filter([
                         <h2 itemprop="headline"><?php echo esc_html($spec_exp_h2_title); ?></h2>
                     </a>
                 </div>
-                <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
-                    <span><?php echo esc_html($spec_exp_author_name); ?></span>
-                </div>
-                <!-- Person microdata in a dedicated visible container -->
-                <div itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    <?php if (!empty($spec_exp_author_name)) : ?>
-                        <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>" />
-                    <?php endif; ?>
+                <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name"><?php echo esc_html($spec_exp_author_name); ?></span>
                     <?php if (!empty($spec_exp_author_photo)) : ?>
                         <meta itemprop="image" content="<?php echo esc_url($spec_exp_author_photo); ?>" />
                     <?php endif; ?>
@@ -118,9 +112,21 @@ $author_same_as = array_filter([
     </section>
 
     <?php
-    // ---------------- JSON-LD Article with Person ----------------
-    $json_ld = [
-        '@context' => 'https://schema.org',
+    // ---------------- JSON-LD Graph: Person + Article ----------------
+    $person_id = rtrim(esc_url($page_url), '/') . '#author';
+    $person_ld = [
+        '@type' => 'Person',
+        '@id'   => $person_id,
+        'name'  => (string) $spec_exp_author_name,
+    ];
+    if (!empty($spec_exp_author_photo)) {
+        $person_ld['image'] = esc_url($spec_exp_author_photo);
+    }
+    if (!empty($author_same_as)) {
+        $person_ld['sameAs'] = array_values(array_map('esc_url', $author_same_as));
+    }
+
+    $article_ld = [
         '@type'    => 'Article',
         'headline' => (string) $spec_exp_h2_title,
         'description' => (string) $spec_exp_author_info,
@@ -128,29 +134,29 @@ $author_same_as = array_filter([
             '@type' => 'WebPage',
             '@id'   => esc_url($page_url),
         ],
-        'image' => !empty($spec_exp_author_photo) ? [esc_url($spec_exp_author_photo)] : [],
-        'author' => [
-            '@type' => 'Person',
-            'name'  => (string) $spec_exp_author_name,
-            'image' => !empty($spec_exp_author_photo) ? esc_url($spec_exp_author_photo) : null,
-            'sameAs'=> array_values(array_map('esc_url', $author_same_as)),
-        ],
+        'author' => [ '@id' => $person_id ],
         'publisher' => [
             '@type' => 'Organization',
             'name'  => (string) $site_name,
-            'logo'  => [
-                '@type' => 'ImageObject',
-                'url'   => (string) $logo_url,
-            ],
         ],
     ];
-    if (!empty($date_published)) { $json_ld['datePublished'] = $date_published; }
-    if (!empty($date_modified))  { $json_ld['dateModified']  = $date_modified; }
+    if (!empty($spec_exp_author_photo)) {
+        $article_ld['image'] = [ esc_url($spec_exp_author_photo) ];
+    }
+    if (!empty($logo_url)) {
+        $article_ld['publisher']['logo'] = [
+            '@type' => 'ImageObject',
+            'url'   => (string) $logo_url,
+        ];
+    }
+    if (!empty($date_published)) { $article_ld['datePublished'] = $date_published; }
+    if (!empty($date_modified))  { $article_ld['dateModified']  = $date_modified; }
 
-    // Очистка пустых полей
-    $json_ld['author'] = array_filter($json_ld['author']);
-    if (empty($json_ld['image'])) { unset($json_ld['image']); }
-    if (empty($logo_url)) { unset($json_ld['publisher']['logo']); }
+    $graph_ld = [ $person_ld, $article_ld ];
+    $json_ld = [
+        '@context' => 'https://schema.org',
+        '@graph'   => $graph_ld,
+    ];
     ?>
     <script type="application/ld+json">
         <?php echo wp_json_encode($json_ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
