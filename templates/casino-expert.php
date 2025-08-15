@@ -104,7 +104,7 @@ $author_same_as = array_filter([
         </div>
 
         <!-- Hidden Person microdata (author) -->
-        <div itemprop="author" itemscope itemtype="https://schema.org/Person" style="display:none">
+        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
             <?php if (!empty($spec_exp_author_name)) : ?>
                 <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>" />
             <?php endif; ?>
