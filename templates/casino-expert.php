@@ -86,7 +86,7 @@ if (!empty($spec_exp_h2_title)) {
                         <h2><?php echo esc_html($spec_exp_h2_title); ?></h2>
                     </a>
                 </div>
-                <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
+                <div class="saintsmedia-author-role" itemprop="author" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
                     <?php echo esc_html($spec_exp_author_name); ?>
                 </div>
             </div>
