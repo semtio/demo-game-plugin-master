@@ -1,5 +1,3 @@
-<!-- тест -->
-
 <?php
 $blur_img        = carbon_get_theme_option('blur_img');
 $btn_to_go       = carbon_get_theme_option('btn_to_go');
