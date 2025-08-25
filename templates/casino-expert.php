@@ -1,7 +1,4 @@
 <?php
-// --------------------------------------------------
-//  Настройки блока «Специалист проверен»
-// --------------------------------------------------
 $spec_exp_bg               = carbon_get_theme_option('spec_exp_bg');
 $spec_exp_main_color_text  = carbon_get_theme_option('spec_exp_main_color_text');
 $spec_exp_color_name       = carbon_get_theme_option('spec_exp_color_name');
@@ -29,7 +26,7 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
 <div class="saintsmedia-wrapper">
     <section itemscope itemprop="author" itemtype="https://schema.org/Person" class="saintsmedia-author-block" style="background-color:<?php echo esc_attr($spec_exp_bg); ?>;">
         <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>">
-        <meta itemprop="follows" content="<?php echo esc_html($spec_exp_author_info); ?>">
+        <meta itemprop="follows" content="<?php echo esc_html($spec_exp_author_info);?>">
         <div class="saintsmedia-author-header">
             <!-- photo as adaptive background -->
             <div <?php echo $photo_attr; ?>></div>
