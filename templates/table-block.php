@@ -31,8 +31,7 @@ if (! empty($complex_table)) :
 
                     <!-- logo -->
                     <a href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
-                        <div <?php echo $logo_attr; ?>
-                            aria-label="<?php echo esc_attr($i['casino_name'] . ' logo'); ?>">
+                        <div <?php echo $logo_attr; ?> >
                             <div class="saintsmedia-order-number"
                                 style="background-color:<?php echo esc_attr($casino_table_outline); ?>; color:<?php echo esc_attr($casino_table_text_color); ?>;"></div>
                         </div>
@@ -54,7 +53,7 @@ if (! empty($complex_table)) :
                     </div>
 
                     <!-- rating -->
-                    <div class="saintsmedia-rating" aria-label="Rating <?php echo esc_attr($i['table_rating_casino']); ?> out of 5">
+                    <div class="saintsmedia-rating">
                         <span class="what-is-rating"><?php echo esc_html($i['table_rating_casino']); ?></span>
                     </div>
 

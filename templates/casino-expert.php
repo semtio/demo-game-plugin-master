@@ -28,16 +28,16 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
 
 <div class="saintsmedia-wrapper">
     <section itemscope itemprop="author" itemtype="https://schema.org/Person" class="saintsmedia-author-block" style="background-color:<?php echo esc_attr($spec_exp_bg); ?>;">
-        <meta itemprop="name" content="Иванов Иван И.">
-        <meta itemprop="follows" content="content content content">
+        <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>">
+        <meta itemprop="follows" content="<?php echo esc_html($spec_exp_author_info); ?>">
         <div class="saintsmedia-author-header">
             <!-- photo as adaptive background -->
-            <div <?php echo $photo_attr; ?> aria-label="Author photo"></div>
+            <div <?php echo $photo_attr; ?>></div>
 
             <div>
                 <div class="saintsmedia-proven-specialist">
                     <i class="fa-solid fa-circle-check" style="color:<?php echo esc_attr($spec_exp_bg_circle); ?>;"></i>
-                    <a href="#" class="saintsmedia-author-name" aria-label="<?php echo esc_attr($spec_exp_author_name . ' profile'); ?>">
+                    <a href="#" class="saintsmedia-author-name">
                         <h2><?php echo esc_html($spec_exp_h2_title); ?></h2>
                     </a>
                 </div>
@@ -60,6 +60,5 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
                 <?php echo !empty($spec_exp_author_telegram)  ? '<a href="' . esc_url($spec_exp_author_telegram)  . '"><i class="fa-brands fa-telegram"></i></a>' : ''; ?>
             </div>
         </div>
-
     </section>
 </div>
