@@ -59,7 +59,7 @@ if (! empty($complex_table)) :
 
                     <!-- CTA -->
                     <div class="saintsmedia-cta">
-                        <a style="background: linear-gradient(90deg, <?php echo $casino_table_col_btn_1; ?> 0%, <?php echo $casino_table_col_btn_2; ?> 100%);" href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
+                        <a style="background: linear-gradient(90deg, <?php echo $casino_table_col_btn_1; ?> 0%, <?php echo $casino_table_col_btn_2; ?> 100%);" href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank" rel="nofollow noopener noreferrer">
                             <?php echo esc_html($i['table_cta_btn']); ?> <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>

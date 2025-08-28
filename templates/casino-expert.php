@@ -24,9 +24,10 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
 
 
 <div class="saintsmedia-wrapper">
-    <section itemscope itemprop="author" itemtype="https://schema.org/Person" class="saintsmedia-author-block" style="background-color:<?php echo esc_attr($spec_exp_bg); ?>;">
+    <section itemscope itemprop="author" itemtype="https://schema.org/Person" class="saintsmedia-author-block"
+        style="background-color:<?php echo esc_attr($spec_exp_bg); ?>;">
         <meta itemprop="name" content="<?php echo esc_attr($spec_exp_author_name); ?>">
-        <meta itemprop="follows" content="<?php echo esc_html($spec_exp_author_info);?>">
+        <meta itemprop="follows" content="<?php echo esc_html($spec_exp_author_info); ?>">
         <div class="saintsmedia-author-header">
             <!-- photo as adaptive background -->
             <div <?php echo $photo_attr; ?>></div>
@@ -35,7 +36,9 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
                 <div class="saintsmedia-proven-specialist">
                     <i class="fa-solid fa-circle-check" style="color:<?php echo esc_attr($spec_exp_bg_circle); ?>;"></i>
                     <a href="#" class="saintsmedia-author-name">
-                        <h2><?php echo esc_html($spec_exp_h2_title); ?></h2>
+                        <h2>
+                            <?php echo esc_html($spec_exp_h2_title); ?>
+                        </h2>
                     </a>
                 </div>
                 <div class="saintsmedia-author-role" style="color:<?php echo esc_attr($spec_exp_color_name); ?>;">
@@ -44,17 +47,55 @@ $photo_attr = saintsmedia_responsive_bg($spec_exp_author_photo, 'saintsmedia-aut
             </div>
         </div>
 
+
+
+
+
+
+
+
         <div class="saintsmedia-author-info">
             <p class="saintsmedia-author-description" style="color:<?php echo esc_attr($spec_exp_main_color_text); ?>;">
                 <?php echo esc_html($spec_exp_author_info); ?>
             </p>
             <div class="saintsmedia-author-contact">
-                <?php echo $spec_exp_author_twitter   ? '<a href="' . esc_url($spec_exp_author_twitter)   . '"><i class="fa-brands fa-x-twitter"></i></a>' : ''; ?>
-                <?php echo $spec_exp_author_linkedin  ? '<a href="' . esc_url($spec_exp_author_linkedin)  . '"><i class="fa-brands fa-linkedin-in"></i></a>' : ''; ?>
-                <?php echo !empty($spec_exp_author_facebook)  ? '<a href="' . esc_url($spec_exp_author_facebook)  . '"><i class="fa-brands fa-facebook-f"></i></a>' : ''; ?>
-                <?php echo !empty($spec_exp_author_instagram) ? '<a href="' . esc_url($spec_exp_author_instagram) . '"><i class="fa-brands fa-instagram"></i></a>' : ''; ?>
-                <?php echo !empty($spec_exp_author_youtube)   ? '<a href="' . esc_url($spec_exp_author_youtube)   . '"><i class="fa-brands fa-youtube"></i></a>' : ''; ?>
-                <?php echo !empty($spec_exp_author_telegram)  ? '<a href="' . esc_url($spec_exp_author_telegram)  . '"><i class="fa-brands fa-telegram"></i></a>' : ''; ?>
+                <?php if ($spec_exp_author_twitter) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_twitter); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/x-twitter.svg'); ?>" alt="x-twitter">
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($spec_exp_author_linkedin) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_linkedin); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/linkedin.svg'); ?>" alt="linkedin">
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($spec_exp_author_facebook) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_facebook); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/facebook.svg'); ?>" alt="facebook">
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($spec_exp_author_instagram) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_instagram); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/instagram.svg'); ?>" alt="instagram">
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($spec_exp_author_youtube) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_youtube); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/youtube.svg'); ?>" alt="youtube">
+                    </a>
+                <?php endif; ?>
+
+                <?php if ($spec_exp_author_telegram) : ?>
+                    <a target="_blank" href="<?php echo esc_url($spec_exp_author_telegram); ?>">
+                        <img src="<?php echo esc_url(plugin_dir_url(__DIR__) . 'fontawesome/6/svgs/all-svg/telegram.svg'); ?>" alt="telegram">
+                    </a>
+                <?php endif; ?>
+
+
             </div>
         </div>
     </section>
