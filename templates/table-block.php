@@ -30,7 +30,7 @@ if (! empty($complex_table)) :
                     style="background-color:<?php echo esc_attr($casino_table_bg_col); ?>; color:<?php echo $casino_table_text_1; ?>;">
 
                     <!-- logo -->
-                    <a href="<?php echo esc_url($i['table_link_to_casino']); ?>" target="_blank" rel="nofollow noopener noreferrer">
+                    <a href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank" rel="nofollow noopener noreferrer">
                         <div <?php echo $logo_attr; ?> >
                             <div class="saintsmedia-order-number"
                                 style="background-color:<?php echo esc_attr($casino_table_outline); ?>; color:<?php echo esc_attr($casino_table_text_color); ?>;"></div>
