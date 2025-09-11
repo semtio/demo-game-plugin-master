@@ -12,8 +12,8 @@ a:active {
     outline: none;
 }
 
-a:visited {
-    color: inherit;
+.saintsmedia-cta a:visited {
+    color: inherit ;
     text-decoration: none;
 }
 
