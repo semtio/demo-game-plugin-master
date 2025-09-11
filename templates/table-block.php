@@ -31,7 +31,7 @@ if (! empty($complex_table)) :
 
                     <!-- logo -->
                     <a href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank" rel="nofollow noopener noreferrer">
-                        <div <?php echo $logo_attr; ?> >
+                        <div <?php echo $logo_attr; ?>>
                             <div class="saintsmedia-order-number"
                                 style="background-color:<?php echo esc_attr($casino_table_outline); ?>; color:<?php echo esc_attr($casino_table_text_color); ?>;"></div>
                         </div>

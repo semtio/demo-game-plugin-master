@@ -26,12 +26,12 @@ function gp_enqueue_assets()
     if (!is_singular()) return;
 
     // Font Awesome
-    // wp_enqueue_style(
-    //     'my-local-font-awesome',
-    //     plugins_url('/fontawesome/6/css/all.min.css', __FILE__),
-    //     [],
-    //     filemtime(plugin_dir_path(__FILE__) . 'fontawesome/6/css/all.min.css')
-    // );
+    wp_enqueue_style(
+        'my-local-font-awesome',
+        plugins_url('/fontawesome/6/css/all.min.css', __FILE__),
+        [],
+        filemtime(plugin_dir_path(__FILE__) . 'fontawesome/6/css/all.min.css')
+    );
 
     // Основной стиль плагина
     wp_enqueue_style(
@@ -71,6 +71,15 @@ function gp_enqueue_assets()
         plugins_url('/assets/accordion.css', __FILE__),
         [],
         null // Можно раскомментировать filemtime
+    );
+
+    // Скрипт приложения
+    wp_enqueue_script(
+        'gp-script',
+        plugins_url('/assets/app.js', __FILE__),
+        [],
+        filemtime(plugin_dir_path(__FILE__) . 'assets/app.js'),
+        true
     );
 }
 

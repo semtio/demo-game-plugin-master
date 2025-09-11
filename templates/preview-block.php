@@ -40,7 +40,7 @@ $color_font_2    = carbon_get_theme_option('color_font_2');
             <?php echo $btn_back_to ?: '← Volver'; ?>
         </button>
         <iframe style="height:100%;width:100%;background:#000;border:0;" id="saintsmedia-iframe"
-            src="<?php echo esc_url($btn_iframe_link); ?>" allowfullscreen></iframe>
+            src="<?php echo esc_url($btn_iframe_link); ?>" allowfullscreen loading="lazy"></iframe>
     </div>
 
 </div>
