@@ -22,6 +22,27 @@ if (! empty($complex_table)) :
         //--------------------------------------------------------------------
         $logo_attr = saintsmedia_responsive_bg($i['casino_table_logo'], 'saintsmedia-logo', 'medium_large');
 ?>
+
+        <style>
+            .saintsmedia-cta a {
+                animation: pulse 3s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 <?php echo $casino_table_col_btn_1; ?>;
+                }
+
+                70% {
+                    box-shadow: 0 0 0 10px rgba(93, 248, 143, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(93, 248, 143, 0);
+                }
+            }
+        </style>
+
         <div class="saintsmedia-wrapper">
             <div class="saintsmedia-casino-table">
 
@@ -30,10 +51,12 @@ if (! empty($complex_table)) :
                     style="background-color:<?php echo esc_attr($casino_table_bg_col); ?>; color:<?php echo $casino_table_text_1; ?>;">
 
                     <!-- logo -->
-                    <a href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank" rel="nofollow noopener noreferrer">
+                    <a href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank"
+                        rel="nofollow noopener noreferrer">
                         <div <?php echo $logo_attr; ?>>
                             <div class="saintsmedia-order-number"
-                                style="background-color:<?php echo esc_attr($casino_table_outline); ?>; color:<?php echo esc_attr($casino_table_text_color); ?>;"></div>
+                                style="background-color:<?php echo esc_attr($casino_table_outline); ?>; color:<?php echo esc_attr($casino_table_text_color); ?>;">
+                            </div>
                         </div>
                     </a>
 
@@ -54,12 +77,16 @@ if (! empty($complex_table)) :
 
                     <!-- rating -->
                     <div class="saintsmedia-rating">
-                        <span class="what-is-rating"><?php echo esc_html($i['table_rating_casino']); ?></span>
+                        <span class="what-is-rating">
+                            <?php echo esc_html($i['table_rating_casino']); ?>
+                        </span>
                     </div>
 
                     <!-- CTA -->
                     <div class="saintsmedia-cta">
-                        <a style="background: linear-gradient(90deg, <?php echo $casino_table_col_btn_1; ?> 0%, <?php echo $casino_table_col_btn_2; ?> 100%);" href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank" rel="nofollow noopener noreferrer">
+                        <a style="background: linear-gradient(90deg, <?php echo $casino_table_col_btn_1; ?> 0%, <?php echo $casino_table_col_btn_2; ?> 100%);"
+                            href="<?php echo esc_url(tfc_go_link($i['table_link_to_casino'])); ?>" target="_blank"
+                            rel="nofollow noopener noreferrer">
                             <?php echo esc_html($i['table_cta_btn']); ?> <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>

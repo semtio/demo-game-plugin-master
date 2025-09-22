@@ -23,7 +23,7 @@ function crb_attach_plugin_options()
                     padding: 0.25rem 0.5rem ;
                  }
             </style>
-            <h3>Шорткоды на плагин DTE:</h3> 
+            <h3>Шорткоды на плагин DTE:</h3>
             <h3>Demo: <b class="saintsmedia-dedicated">[game_preview]</b></h3>
             <h3>Таблица: <b class="saintsmedia-dedicated">[table_block]</b></h3>
             <h3>Експерт: <b class="saintsmedia-dedicated">[expert_author]</b></h3>
@@ -31,9 +31,9 @@ function crb_attach_plugin_options()
 
             <br>
             <hr>
-            <h3>Установка:</h3> 
-            <h3>Плагин DTE: <b class="saintsmedia-dedicated">semtio/demo-game-plugin-master</b></h3> 
-            <h3>Тема: <b class="saintsmedia-dedicated">semtio/saintsmedia-theme</b></h3> 
+            <h3>Установка:</h3>
+            <h3>Плагин DTE: <b class="saintsmedia-dedicated">semtio/demo-game-plugin-master</b></h3>
+            <h3>Тема: <b class="saintsmedia-dedicated">semtio/saintsmedia-theme</b></h3>
 
         ')]);
 
@@ -113,38 +113,38 @@ function crb_attach_plugin_options()
             Field::make('separator', 'css_1', __('Стили')),
             // CSS стили карточек
             Field::make('color', 'casino_table_text_1', __('Цвет текста (casino_table_text_1)'))
-                ->set_width(10)
+                ->set_width(33)
                 ->set_default_value('#ffffff')
                 ->set_palette(array('#ffffff')),
 
-            Field::make('color', 'casino_table_col_btn_1', __('1ый Градиент кнопки (casino_table_col_btn_1)'))
-                ->set_width(10)
+            Field::make('color', 'casino_table_col_btn_1', __('1ый Градиент кнопки + Пульсация (casino_table_col_btn_1)'))
+                ->set_width(33)
                 ->set_default_value('#40e06f')
                 ->set_palette(array('#40e06f')),
 
             Field::make('color', 'casino_table_col_btn_2', __('2ой Градиент кнопки(casino_table_col_btn_2)'))
-                ->set_width(10)
+                ->set_width(33)
                 ->set_default_value('#5df88f')
                 ->set_palette(array('#5df88f')),
 
             Field::make('color', 'casino_table_bg_col', __('Фон карточек списка (casino_table_bg_col)'))
-                ->set_width(10)
+                ->set_width(33)
                 ->set_default_value('#1B2C5F')
                 ->set_palette(array('#1B2C5F')),
 
             Field::make('color', 'casino_table_outline', __('Обводка + Нумерация (casino_table_outline)'))
-                ->set_width(10)
+                ->set_width(33)
                 ->set_default_value('#A340FB')
                 ->set_palette(array('#A340FB')),
 
             Field::make('color', 'casino_table_text_color', __('Цвет номера (casino_table_text_color)'))
-                ->set_width(10)
+                ->set_width(33)
                 ->set_default_value('#ffffffff')
                 ->set_palette(array('#ffffffff')),
 
 
             Field::make('separator', 'crb_separator2', __('Таблица казино')),
-            // Цикл 
+            // Цикл
             Field::make('complex', 'complex_table', __('table'))
                 ->add_fields([
                     // Логотип
