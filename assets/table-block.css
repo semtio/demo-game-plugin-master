@@ -103,6 +103,7 @@ a:active {
 }
 
 .saintsmedia-info-descr {
+    text-align: center !important;
     font-size: 0.95rem;
     font-weight: 600;
 }
