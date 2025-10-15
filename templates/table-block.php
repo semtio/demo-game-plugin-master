@@ -70,7 +70,7 @@ if (! empty($complex_table)) :
                         <div class="saintsmedia-info-tag">
                             <?php echo esc_html($i['table_info_tag']); ?>
                         </div>
-                        <div class="saintsmedia-info-descr">
+                        <div style="text-align: center !important;" class="saintsmedia-info-descr">
                             <!-- echo esc_html($i['table_info_descr']);  -->
                             <?php echo wp_kses_post(wpautop($i['table_info_descr'])); ?>
                         </div>
