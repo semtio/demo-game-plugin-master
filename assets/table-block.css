@@ -82,6 +82,9 @@ a:active {
 }
 
 .saintsmedia-casino-name {
+    width: 200px;
+    text-align: center !important;
+
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
