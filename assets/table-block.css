@@ -9,7 +9,7 @@ a:active {
 }
 
 .saintsmedia-cta a:visited {
-    color: inherit ;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -103,9 +103,12 @@ a:active {
 }
 
 .saintsmedia-info-descr {
-    text-align: center !important;
     font-size: 0.95rem;
     font-weight: 600;
+}
+
+.saintsmedia-info-descr p{
+    text-align: center !important;
 }
 
 .saintsmedia-rating {
