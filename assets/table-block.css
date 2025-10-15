@@ -107,7 +107,7 @@ a:active {
     font-weight: 600;
 }
 
-.saintsmedia-info-descr p{
+.saintsmedia-info-descr > p{
     text-align: center !important;
 }
 
