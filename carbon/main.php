@@ -28,6 +28,7 @@ function crb_attach_plugin_options()
             <h3>Таблица: <b class="saintsmedia-dedicated">[table_block]</b></h3>
             <h3>Експерт: <b class="saintsmedia-dedicated">[expert_author]</b></h3>
             <h3>Аккордион: <b class="saintsmedia-dedicated">[saintsmedia_accordion]</b></h3>
+            <h3>Витрина Слотов: <b class="saintsmedia-dedicated">[slots_showcase]</b></h3>
 
             <br>
             <hr>
@@ -231,6 +232,21 @@ function crb_attach_plugin_options()
             Field::make('textarea', 'accordion_hesh_tags', __('Писать каждый тег с новой строки'))
                 ->set_rows(4)
                 ->set_width(66)
+        ]);
+
+    Container::make('theme_options', 'Витрина Слотов')
+        ->set_page_parent('crb_demo_game')
+        ->add_fields([
+            Field::make('complex', 'complex_slots_showcase', __('Слоты'))
+                ->add_fields([
+                    // IMG слота
+                    Field::make('image', 'slot_showcase_img', __('IMG'))
+                        ->set_value_type('url'),
+                    Field::make('text', 'slot_showcase_url', __('URL'))
+                        ->set_width(25),
+                    Field::make('text', 'slot_showcase_article', __('Заголовок'))
+                        ->set_width(25)
+                ])->set_collapsed(true), // true для развёрнуто всегда
         ]);
 }
 

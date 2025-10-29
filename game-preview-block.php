@@ -73,6 +73,14 @@ function gp_enqueue_assets()
         null // Можно раскомментировать filemtime
     );
 
+    // slots-showcase.css
+    wp_enqueue_style(
+        'gp-slots-showcase-css',
+        plugins_url('/assets/slots-showcase.css', __FILE__),
+        [],
+        null // Можно раскомментировать filemtime
+    );
+
     // Скрипт приложения
     wp_enqueue_script(
         'gp-script',
@@ -118,6 +126,15 @@ function saintsmedia_accordion()
 {
     ob_start();
     include plugin_dir_path(__FILE__) . 'templates/accordion.php';
+    return ob_get_clean();
+}
+
+// Шорткод для витрины слотов
+add_shortcode('slots_showcase', 'slots_showcase__short');
+function slots_showcase__short()
+{
+    ob_start();
+    include plugin_dir_path(__FILE__) . 'templates/slots-showcase.php';
     return ob_get_clean();
 }
 
