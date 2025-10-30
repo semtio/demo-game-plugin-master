@@ -245,11 +245,12 @@ function crb_attach_plugin_options()
                 ->add_fields([
                     // IMG слота
                     Field::make('image', 'slot_showcase_img', __('IMG'))
-                        ->set_value_type('url'),
+                        ->set_value_type('url')
+                        ->set_width(10),
                     Field::make('text', 'slot_showcase_url', __('URL'))
-                        ->set_width(25),
+                        ->set_width(20),
                     Field::make('rich_text', 'slot_showcase_article', __('Заголовок'))
-                        ->set_width(50)
+                        ->set_width(60)
                 ])->set_collapsed(true), // true для развёрнуто всегда
         ]);
 }
