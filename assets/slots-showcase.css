@@ -1,0 +1,136 @@
+/* CSS переменные */
+:root {
+  --slots-showcase-gap: 16px;
+  --slots-showcase-cols-desktop: 6;
+  --slots-showcase-cols-tablet: 3;
+  --slots-showcase-cols-mobile: 2;
+  --slots-showcase-radius: 16px;
+  --slots-showcase-caption-bg: rgba(0, 0, 0, 0.55);
+  --slots-showcase-caption-color: #fff;
+  --slots-showcase-hover-scale: 1.06;
+  --slots-showcase-transition: 0.35s ease;
+}
+
+/* Базовые стили */
+* {
+  box-sizing: border-box;
+}
+
+.slots-showcase__caption{
+    text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #1a1a2e;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Контейнер секции */
+.slots-showcase {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Сетка карточек */
+.slots-showcase__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--slots-showcase-cols-mobile), 1fr);
+  gap: var(--slots-showcase-gap);
+}
+
+/* Брейкпоинты */
+@media (min-width: 768px) {
+  .slots-showcase__grid {
+    grid-template-columns: repeat(var(--slots-showcase-cols-tablet), 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .slots-showcase__grid {
+    grid-template-columns: repeat(var(--slots-showcase-cols-desktop), 1fr);
+  }
+}
+
+/* Карточка */
+.slots-showcase__card {
+  display: block;
+  border-radius: var(--slots-showcase-radius);
+  overflow: hidden;
+  background: #0a0b14;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--slots-showcase-transition);
+}
+
+/* Figure и изображение */
+.slots-showcase__figure {
+  margin: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+/* Fallback для старых браузеров без aspect-ratio */
+@supports not (aspect-ratio: 1) {
+  .slots-showcase__figure {
+    position: relative;
+  }
+  .slots-showcase__figure::before {
+    content: "";
+    display: block;
+    padding-top: 133.333%; /* 4/3 */
+  }
+  .slots-showcase__img,
+  .slots-showcase__caption {
+    position: absolute;
+    inset: 0;
+  }
+  .slots-showcase__caption {
+    inset: auto 0 0 0;
+  }
+}
+
+/* Изображение */
+.slots-showcase__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform var(--slots-showcase-transition);
+  display: block;
+}
+
+/* Подпись */
+.slots-showcase__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0) 100%);
+  color: var(--slots-showcase-caption-color);
+  padding: 20px 12px 10px;
+  line-height: 1.25;
+  z-index: 1;
+}
+
+.slots-showcase__title {
+  font: 600 14px/1.25 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Hover/focus эффект */
+.slots-showcase__card:is(:hover, :focus-visible) .slots-showcase__img {
+  transform: scale(var(--slots-showcase-hover-scale));
+}
+
+.slots-showcase__card:focus-visible {
+  outline: 2px solid #6cf;
+  outline-offset: 2px;
+}
