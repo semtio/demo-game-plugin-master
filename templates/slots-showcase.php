@@ -24,7 +24,7 @@ if (! empty($complex_slots_showcase)) :
                     alt="<?php echo esc_attr($i['slot_showcase_article']); ?>"
                     loading="lazy"></div>
                 <figcaption class="slots-showcase__caption">
-                    <h5 class="slots-showcase__title"><?php echo esc_html(strtoupper($i['slot_showcase_article'])); ?></h5>
+                    <div class="slots-showcase__title"><?php echo wp_kses_post($i['slot_showcase_article']); ?></div>
                 </figcaption>
             </figure>
         </a>

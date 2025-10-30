@@ -248,8 +248,8 @@ function crb_attach_plugin_options()
                         ->set_value_type('url'),
                     Field::make('text', 'slot_showcase_url', __('URL'))
                         ->set_width(25),
-                    Field::make('text', 'slot_showcase_article', __('Заголовок'))
-                        ->set_width(25)
+                    Field::make('rich_text', 'slot_showcase_article', __('Заголовок'))
+                        ->set_width(50)
                 ])->set_collapsed(true), // true для развёрнуто всегда
         ]);
 }
