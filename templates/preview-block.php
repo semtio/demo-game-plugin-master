@@ -5,7 +5,7 @@
 
 $demo_data = isset($GLOBALS['gp_demo_card_data']) ? $GLOBALS['gp_demo_card_data'] : null;
 
-if ($demo_data) {
+if ($demo_data !== null) {
     // Используем данные из шорткода (new complex или legacy)
     $blur_img        = $demo_data['blur_img'] ?? '';
     $btn_to_go       = $demo_data['btn_to_go'] ?? '';

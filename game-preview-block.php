@@ -106,8 +106,9 @@ function gp_get_demo_card($index = 0) {
 
     // Если complex не пуст — используем его
     if (!empty($demo_cards) && is_array($demo_cards)) {
-        if (isset($demo_cards[$index])) {
-            return $demo_cards[$index];
+        $items = array_values($demo_cards);
+        if (isset($items[$index])) {
+            return $items[$index];
         }
         // Если запрошенный индекс не существует — возвращаем null
         return null;
@@ -147,7 +148,7 @@ function gp_get_all_demo_cards() {
 
     // Если complex не пуст — используем его
     if (!empty($demo_cards) && is_array($demo_cards)) {
-        return $demo_cards;
+        return array_values($demo_cards);
     }
 
     // ОБРАТНАЯ СОВМЕСТИМОСТЬ: если complex пуст
