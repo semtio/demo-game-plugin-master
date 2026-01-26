@@ -91,16 +91,123 @@ function gp_enqueue_assets()
     );
 }
 
-// Шорткод для блока превью
+// ================= ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ДЕМО =================
+
+/**
+ * Получить демо-карточку по индексу (0-based)
+ * С поддержкой обратной совместимости
+ *
+ * @param int $index индекс карточки (0, 1, 2, ...)
+ * @return array|null данные карточки или null если не найдена
+ */
+function gp_get_demo_card($index = 0) {
+    // Получаем complex field с новыми демо-карточками
+    $demo_cards = carbon_get_theme_option('demo_cards');
+
+    // Если complex не пуст — используем его
+    if (!empty($demo_cards) && is_array($demo_cards)) {
+        if (isset($demo_cards[$index])) {
+            return $demo_cards[$index];
+        }
+        // Если запрошенный индекс не существует — возвращаем null
+        return null;
+    }
+
+    // ОБРАТНАЯ СОВМЕСТИМОСТЬ: если complex пуст и запрашиваем первую карточку
+    // — возвращаем старые одиночные поля
+    if ($index === 0) {
+        return [
+            'btn_color_1'       => carbon_get_theme_option('btn_color_1'),
+            'btn_color_2'       => carbon_get_theme_option('btn_color_2'),
+            'color_font_1'      => carbon_get_theme_option('color_font_1'),
+            'btn_color_3'       => carbon_get_theme_option('btn_color_3'),
+            'btn_color_4'       => carbon_get_theme_option('btn_color_4'),
+            'color_font_2'      => carbon_get_theme_option('color_font_2'),
+            'blur_img'          => carbon_get_theme_option('blur_img'),
+            'height_for'        => carbon_get_theme_option('height_for'),
+            'btn_to_go'         => carbon_get_theme_option('btn_to_go'),
+            'btn_to_go_link'    => carbon_get_theme_option('btn_to_go_link'),
+            'btn_iframe'        => carbon_get_theme_option('btn_iframe'),
+            'btn_iframe_link'   => carbon_get_theme_option('btn_iframe_link'),
+            'btn_back_to'       => carbon_get_theme_option('btn_back_to'),
+        ];
+    }
+
+    // Если complex пуст и запрашиваем индекс > 0 — возвращаем null
+    return null;
+}
+
+/**
+ * Получить все демо-карточки с поддержкой обратной совместимости
+ *
+ * @return array массив всех демо-карточек
+ */
+function gp_get_all_demo_cards() {
+    $demo_cards = carbon_get_theme_option('demo_cards');
+
+    // Если complex не пуст — используем его
+    if (!empty($demo_cards) && is_array($demo_cards)) {
+        return $demo_cards;
+    }
+
+    // ОБРАТНАЯ СОВМЕСТИМОСТЬ: если complex пуст
+    // — возвращаем первую карточку из старых полей
+    $legacy_card = gp_get_demo_card(0);
+    if ($legacy_card) {
+        return [$legacy_card];
+    }
+
+    return [];
+}
+
+// ================= ШОРТКОДЫ ДЕМО =================
+
+/**
+ * Основной шорткод [game_preview]
+ * Выводит первую демо-карточку (индекс 0)
+ */
 add_shortcode('game_preview', 'gp_render_shortcode');
 function gp_render_shortcode()
 {
-    ob_start();
-    include plugin_dir_path(__FILE__) . 'templates/preview-block.php';
-    return ob_get_clean();
+    return gp_render_shortcode_by_index(0);
 }
 
-// Шорткод для таблицы
+/**
+ * Универсальная функция для вывода демо-карточки по индексу
+ *
+ * @param int $index индекс карточки (0-based)
+ * @return string HTML шорткода или пустая строка если карточка не найдена
+ */
+function gp_render_shortcode_by_index($index = 0) {
+    // Получаем данные демо-карточки
+    $demo_card = gp_get_demo_card($index);
+
+    // Если карточка не найдена — возвращаем пустую строку (без ошибок)
+    if (!$demo_card) {
+        return '';
+    }
+
+    // Сохраняем карточку в переменную для использования в шаблоне
+    $GLOBALS['gp_demo_card_data'] = $demo_card;
+
+    ob_start();
+    include plugin_dir_path(__FILE__) . 'templates/preview-block.php';
+    $html = ob_get_clean();
+
+    // Очищаем глобальную переменную
+    unset($GLOBALS['gp_demo_card_data']);
+
+    return $html;
+}
+
+// Регистрируем дополнительные шорткоды [game_preview-1], [game_preview-2], и т.д.
+for ($i = 1; $i <= 20; $i++) {
+    add_shortcode('game_preview-' . $i, function() use ($i) {
+        return gp_render_shortcode_by_index($i);
+    });
+}
+
+
 add_shortcode('table_block', 'table_block__short');
 function table_block__short()
 {

@@ -1,17 +1,41 @@
 <?php
-$blur_img        = carbon_get_theme_option('blur_img');
-$btn_to_go       = carbon_get_theme_option('btn_to_go');
-$btn_iframe      = carbon_get_theme_option('btn_iframe');
-$btn_back_to     = carbon_get_theme_option('btn_back_to');
-$btn_to_go_link  = carbon_get_theme_option('btn_to_go_link');
-$btn_iframe_link = carbon_get_theme_option('btn_iframe_link');
-$height_for      = carbon_get_theme_option('height_for');
-$btn_color_1     = carbon_get_theme_option('btn_color_1');
-$btn_color_2     = carbon_get_theme_option('btn_color_2');
-$btn_color_3     = carbon_get_theme_option('btn_color_3');
-$btn_color_4     = carbon_get_theme_option('btn_color_4');
-$color_font_1    = carbon_get_theme_option('color_font_1');
-$color_font_2    = carbon_get_theme_option('color_font_2');
+// Получаем данные демо-карточки
+// Они могут быть установлены из шорткода (для индексированных вызовов)
+// или прямые из Carbon Fields (для обратной совместимости)
+
+$demo_data = isset($GLOBALS['gp_demo_card_data']) ? $GLOBALS['gp_demo_card_data'] : null;
+
+if ($demo_data) {
+    // Используем данные из шорткода (new complex или legacy)
+    $blur_img        = $demo_data['blur_img'] ?? '';
+    $btn_to_go       = $demo_data['btn_to_go'] ?? '';
+    $btn_iframe      = $demo_data['btn_iframe'] ?? '';
+    $btn_back_to     = $demo_data['btn_back_to'] ?? '';
+    $btn_to_go_link  = $demo_data['btn_to_go_link'] ?? '';
+    $btn_iframe_link = $demo_data['btn_iframe_link'] ?? '';
+    $height_for      = $demo_data['height_for'] ?? '';
+    $btn_color_1     = $demo_data['btn_color_1'] ?? '';
+    $btn_color_2     = $demo_data['btn_color_2'] ?? '';
+    $btn_color_3     = $demo_data['btn_color_3'] ?? '';
+    $btn_color_4     = $demo_data['btn_color_4'] ?? '';
+    $color_font_1    = $demo_data['color_font_1'] ?? '';
+    $color_font_2    = $demo_data['color_font_2'] ?? '';
+} else {
+    // ОБРАТНАЯ СОВМЕСТИМОСТЬ: используем старые поля напрямую
+    $blur_img        = carbon_get_theme_option('blur_img');
+    $btn_to_go       = carbon_get_theme_option('btn_to_go');
+    $btn_iframe      = carbon_get_theme_option('btn_iframe');
+    $btn_back_to     = carbon_get_theme_option('btn_back_to');
+    $btn_to_go_link  = carbon_get_theme_option('btn_to_go_link');
+    $btn_iframe_link = carbon_get_theme_option('btn_iframe_link');
+    $height_for      = carbon_get_theme_option('height_for');
+    $btn_color_1     = carbon_get_theme_option('btn_color_1');
+    $btn_color_2     = carbon_get_theme_option('btn_color_2');
+    $btn_color_3     = carbon_get_theme_option('btn_color_3');
+    $btn_color_4     = carbon_get_theme_option('btn_color_4');
+    $color_font_1    = carbon_get_theme_option('color_font_1');
+    $color_font_2    = carbon_get_theme_option('color_font_2');
+}
 ?>
 
 

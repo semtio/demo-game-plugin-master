@@ -46,59 +46,110 @@ function crb_attach_plugin_options()
     Container::make('theme_options', 'Demo')
         ->set_page_parent('crb_demo_game')
         ->add_fields([
-            // Кнопка ЦВЕТ #1
-            Field::make('color', 'btn_color_1', __('Кнопка перехода на сайт ЦВЕТ_ФОН_1 (btn_color_1)'))
+            Field::make('complex', 'demo_cards', __('Demo cards (новые демо-карточки)'))
+                ->add_fields('card', [
+                    // Кнопка ЦВЕТ #1
+                    Field::make('color', 'btn_color_1', __('Кнопка перехода на сайт ЦВЕТ_ФОН_1 (btn_color_1)'))
+                        ->set_width(33)
+                        ->set_palette(array('#FF7A00'))
+                        ->set_default_value('#FF7A00'),
+                    Field::make('color', 'btn_color_2', __('Кнопка перехода на сайт ЦВЕТ_ФОН_2 (btn_color_2)'))
+                        ->set_width(33)
+                        ->set_palette(array('#FF002B'))
+                        ->set_default_value('#FF002B'),
+                    Field::make('color', 'color_font_1', __('Кнопка перехода на сайт ЦВЕТ ТЕКСТ (color_font_1)'))
+                        ->set_width(33)
+                        ->set_palette(array('#ffffff'))
+                        ->set_default_value('#ffffff'),
+
+                    // Кнопка ЦВЕТ #2
+                    Field::make('color', 'btn_color_3', __('Кнопка ДЕМО ЦВЕТ_ФОН_1 (btn_color_3)'))
+                        ->set_width(33)
+                        ->set_palette(array('#ffd700'))
+                        ->set_default_value('#ffd700'),
+                    Field::make('color', 'btn_color_4', __('Кнопка ДЕМО ЦВЕТ_ФОН_2 (btn_color_4)'))
+                        ->set_width(33)
+                        ->set_palette(array('#ffd700'))
+                        ->set_default_value('#ffd700'),
+                    Field::make('color', 'color_font_2', __('Кнопка ДЕМО ЦВЕТ_ТЕКСТ (color_font_2)'))
+                        ->set_width(33)
+                        ->set_palette(array('#484848'))
+                        ->set_default_value('#484848'),
+
+                    // Фон картинка
+                    Field::make('image', 'blur_img', __('Картинка-Фон (blur_img)'))
+                        ->set_value_type('url')
+                        ->set_width(50),
+                    // Высота
+                    Field::make('text', 'height_for', __('Высота окна (height_for)'))
+                        ->set_width(50),
+
+                    // Кнопка 1
+                    Field::make('text', 'btn_to_go', __('Кнопка перехода (btn_to_go)'))
+                        ->set_width(50),
+                    Field::make('text', 'btn_to_go_link', __('Ссылка перехода (btn_to_go_link)'))
+                        ->set_width(50),
+
+                    // Кнопка 2
+                    Field::make('text', 'btn_iframe', __('Кнопка Iframe (btn_iframe)'))
+                        ->set_width(50),
+                    Field::make('text', 'btn_iframe_link', __('Ссылка Iframe (btn_iframe_link)'))
+                        ->set_width(50),
+
+                    // Кнопка назад
+                    Field::make('text', 'btn_back_to', __('Кнопка назад (btn_back_to)'))
+                ])->set_header_template(__('Demo #<%- $_index + 1 %>'))->set_collapsed(true),
+
+            // ============================================
+            // СТАРЫЕ ПОЛЯ ДЛЯ ОБРАТНОЙ СОВМЕСТИМОСТИ
+            // (используются если demo_cards пусто)
+            // ============================================
+            Field::make('separator', 'demo_legacy_separator', __('⚠️ Наследие (старая демо-карточка — используется если выше ничего не добавлено)')),
+
+            Field::make('color', 'btn_color_1', __('[Наследие] Кнопка перехода ЦВЕТ_ФОН_1 (btn_color_1)'))
                 ->set_width(33)
                 ->set_palette(array('#FF7A00'))
                 ->set_default_value('#FF7A00'),
-            Field::make('color', 'btn_color_2', __('Кнопка перехода на сайт ЦВЕТ_ФОН_2 (btn_color_2)'))
+            Field::make('color', 'btn_color_2', __('[Наследие] Кнопка перехода ЦВЕТ_ФОН_2 (btn_color_2)'))
                 ->set_width(33)
                 ->set_palette(array('#FF002B'))
                 ->set_default_value('#FF002B'),
-            Field::make('color', 'color_font_1', __('Кнопка перехода на сайт ЦВЕТ ТЕКСТ (color_font_1)'))
+            Field::make('color', 'color_font_1', __('[Наследие] Кнопка перехода ЦВЕТ ТЕКСТ (color_font_1)'))
                 ->set_width(33)
                 ->set_palette(array('#ffffff'))
                 ->set_default_value('#ffffff'),
 
-            // Кнопка ЦВЕТ #2
-            // Field::make('separator', 'sep2', 'Кнопки 2'),
-            Field::make('color', 'btn_color_3', __('Кнопка ДЕМО ЦВЕТ_ФОН_1 (btn_color_3)'))
+            Field::make('color', 'btn_color_3', __('[Наследие] Кнопка ДЕМО ЦВЕТ_ФОН_1 (btn_color_3)'))
                 ->set_width(33)
                 ->set_palette(array('#ffd700'))
                 ->set_default_value('#ffd700'),
-            Field::make('color', 'btn_color_4', __('Кнопка ДЕМО ЦВЕТ_ФОН_2 (btn_color_4)'))
+            Field::make('color', 'btn_color_4', __('[Наследие] Кнопка ДЕМО ЦВЕТ_ФОН_2 (btn_color_4)'))
                 ->set_width(33)
                 ->set_palette(array('#ffd700'))
                 ->set_default_value('#ffd700'),
-            Field::make('color', 'color_font_2', __('Кнопка ДЕМО ЦВЕТ_ТЕКСТ (color_font_2)'))
+            Field::make('color', 'color_font_2', __('[Наследие] Кнопка ДЕМО ЦВЕТ_ТЕКСТ (color_font_2)'))
                 ->set_width(33)
                 ->set_palette(array('#484848'))
                 ->set_default_value('#484848'),
 
-            // Фон картинка
-            Field::make('image', 'blur_img', __('Картинка-Фон (blur_img)'))
+            Field::make('image', 'blur_img', __('[Наследие] Картинка-Фон (blur_img)'))
                 ->set_value_type('url')
                 ->set_width(50),
-            // Высота
-            Field::make('text', 'height_for', __('Высота окна (height_for)'))
+            Field::make('text', 'height_for', __('[Наследие] Высота окна (height_for)'))
                 ->set_width(50),
 
-            // Кнопка 1
-            Field::make('text', 'btn_to_go', __('Кнопка перехода (btn_to_go)'))
+            Field::make('text', 'btn_to_go', __('[Наследие] Кнопка перехода (btn_to_go)'))
                 ->set_width(50),
-            Field::make('text', 'btn_to_go_link', __('Ссылка перехода (btn_to_go_link)'))
-                ->set_width(50),
-
-            // Кнопка 2
-            Field::make('text', 'btn_iframe', __('Кнопка Iframe (btn_iframe)'))
-                ->set_width(50),
-            Field::make('text', 'btn_iframe_link', __('Ссылка Iframe (btn_iframe_link)'))
+            Field::make('text', 'btn_to_go_link', __('[Наследие] Ссылка перехода (btn_to_go_link)'))
                 ->set_width(50),
 
+            Field::make('text', 'btn_iframe', __('[Наследие] Кнопка Iframe (btn_iframe)'))
+                ->set_width(50),
+            Field::make('text', 'btn_iframe_link', __('[Наследие] Ссылка Iframe (btn_iframe_link)'))
+                ->set_width(50),
 
-
-            // Кнопка назад
-            Field::make('text', 'btn_back_to', __('Кнопка назад (btn_back_to)'))
+            Field::make('text', 'btn_back_to', __('[Наследие] Кнопка назад (btn_back_to)'))
+                ->set_width(50),
         ]);
 
 
