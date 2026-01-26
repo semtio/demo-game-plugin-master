@@ -166,11 +166,18 @@ function gp_get_all_demo_cards() {
 /**
  * Основной шорткод [game_preview]
  * Выводит первую демо-карточку (индекс 0)
+ * Поддерживает атрибут index: [game_preview index="1"]
  */
 add_shortcode('game_preview', 'gp_render_shortcode');
-function gp_render_shortcode()
+function gp_render_shortcode($atts = [])
 {
-    return gp_render_shortcode_by_index(0);
+    $atts = shortcode_atts([
+        'index' => 1,
+    ], $atts, 'game_preview');
+
+    $index = max(1, (int) $atts['index']);
+
+    return gp_render_shortcode_by_index($index - 1);
 }
 
 /**
@@ -201,14 +208,21 @@ function gp_render_shortcode_by_index($index = 0) {
     return $html;
 }
 
-// Регистрируем дополнительные шорткоды [game_preview-1], [game_preview-2], и т.д.
-// [game_preview-1] = индекс 0 (первая карточка)
-// [game_preview-2] = индекс 1 (вторая карточка)
-// и т.д.
-for ($i = 1; $i <= 20; $i++) {
-    add_shortcode('game_preview-' . $i, function() use ($i) {
-        return gp_render_shortcode_by_index($i - 1);
-    });
+// Поддержка шорткодов с дефисом: [game_preview-1], [game_preview-2], ...
+// WordPress не регистрирует такие теги напрямую, поэтому преобразуем их в [game_preview index="N"].
+add_filter('the_content', 'gp_expand_demo_shortcodes', 9);
+function gp_expand_demo_shortcodes($content)
+{
+    return preg_replace_callback('/\[game_preview-(\d+)([^\]]*)\]/', function ($matches) {
+        $index = (int) $matches[1];
+        $tail = trim($matches[2] ?? '');
+
+        if ($index < 1) {
+            $index = 1;
+        }
+
+        return '[game_preview index="' . $index . '"' . ($tail ? ' ' . $tail : '') . ']';
+    }, $content);
 }
 
 
