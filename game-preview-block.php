@@ -94,47 +94,51 @@ function gp_enqueue_assets()
 // ================= ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ДЕМО =================
 
 /**
- * Получить демо-карточку по индексу (0-based)
- * С поддержкой обратной совместимости
+ * Получить СТАРУЮ legacy демо-карточку
+ * Всегда возвращает данные из старых одиночных полей
  *
- * @param int $index индекс карточки (0, 1, 2, ...)
+ * @return array данные legacy карточки
+ */
+function gp_get_legacy_demo_card() {
+    return [
+        'btn_color_1'       => carbon_get_theme_option('btn_color_1'),
+        'btn_color_2'       => carbon_get_theme_option('btn_color_2'),
+        'color_font_1'      => carbon_get_theme_option('color_font_1'),
+        'btn_color_3'       => carbon_get_theme_option('btn_color_3'),
+        'btn_color_4'       => carbon_get_theme_option('btn_color_4'),
+        'color_font_2'      => carbon_get_theme_option('color_font_2'),
+        'blur_img'          => carbon_get_theme_option('blur_img'),
+        'height_for'        => carbon_get_theme_option('height_for'),
+        'btn_to_go'         => carbon_get_theme_option('btn_to_go'),
+        'btn_to_go_link'    => carbon_get_theme_option('btn_to_go_link'),
+        'btn_iframe'        => carbon_get_theme_option('btn_iframe'),
+        'btn_iframe_link'   => carbon_get_theme_option('btn_iframe_link'),
+        'btn_back_to'       => carbon_get_theme_option('btn_back_to'),
+    ];
+}
+
+/**
+ * Получить НОВУЮ демо-карточку из complex по индексу (0-based)
+ *
+ * @param int $index индекс карточки в complex (0, 1, 2, ...)
  * @return array|null данные карточки или null если не найдена
  */
 function gp_get_demo_card($index = 0) {
     // Получаем complex field с новыми демо-карточками
     $demo_cards = carbon_get_theme_option('demo_cards');
 
-    // Если complex не пуст — используем его
-    if (!empty($demo_cards) && is_array($demo_cards)) {
-        $items = array_values($demo_cards);
-        if (isset($items[$index])) {
-            return $items[$index];
-        }
-        // Если запрошенный индекс не существует — возвращаем null
+    // Если complex пуст — возвращаем null
+    if (empty($demo_cards) || !is_array($demo_cards)) {
         return null;
     }
 
-    // ОБРАТНАЯ СОВМЕСТИМОСТЬ: если complex пуст и запрашиваем первую карточку
-    // — возвращаем старые одиночные поля
-    if ($index === 0) {
-        return [
-            'btn_color_1'       => carbon_get_theme_option('btn_color_1'),
-            'btn_color_2'       => carbon_get_theme_option('btn_color_2'),
-            'color_font_1'      => carbon_get_theme_option('color_font_1'),
-            'btn_color_3'       => carbon_get_theme_option('btn_color_3'),
-            'btn_color_4'       => carbon_get_theme_option('btn_color_4'),
-            'color_font_2'      => carbon_get_theme_option('color_font_2'),
-            'blur_img'          => carbon_get_theme_option('blur_img'),
-            'height_for'        => carbon_get_theme_option('height_for'),
-            'btn_to_go'         => carbon_get_theme_option('btn_to_go'),
-            'btn_to_go_link'    => carbon_get_theme_option('btn_to_go_link'),
-            'btn_iframe'        => carbon_get_theme_option('btn_iframe'),
-            'btn_iframe_link'   => carbon_get_theme_option('btn_iframe_link'),
-            'btn_back_to'       => carbon_get_theme_option('btn_back_to'),
-        ];
+    // Перебираем complex элементы
+    $items = array_values($demo_cards);
+    if (isset($items[$index])) {
+        return $items[$index];
     }
 
-    // Если complex пуст и запрашиваем индекс > 0 — возвращаем null
+    // Если запрошенный индекс не существует — возвращаем null
     return null;
 }
 
@@ -165,34 +169,33 @@ function gp_get_all_demo_cards() {
 
 /**
  * Основной шорткод [game_preview]
- * Выводит первую демо-карточку (индекс 0)
- * Поддерживает атрибут index: [game_preview index="1"]
+ * БЕЗ параметров → выводит СТАРУЮ legacy-карточку
+ * С параметром index → выводит НОВУЮ карточку из complex
+ *
+ * Примеры:
+ * [game_preview] → legacy (старая карточка)
+ * [game_preview index="1"] → первая новая карточка из complex
+ * [game_preview index="2"] → вторая новая карточка из complex
  */
 add_shortcode('game_preview', 'gp_render_shortcode');
 function gp_render_shortcode($atts = [])
 {
     $atts = shortcode_atts([
-        'index' => 1,
+        'index' => null,
     ], $atts, 'game_preview');
 
-    $index = max(1, (int) $atts['index']);
+    // Если НЕ указан index → всегда выводим legacy
+    if ($atts['index'] === null) {
+        $demo_card = gp_get_legacy_demo_card();
+    } else {
+        // Если указан index → берём из complex
+        $index = max(1, (int) $atts['index']);
+        $demo_card = gp_get_demo_card($index - 1);
 
-    return gp_render_shortcode_by_index($index - 1);
-}
-
-/**
- * Универсальная функция для вывода демо-карточки по индексу
- *
- * @param int $index индекс карточки (0-based)
- * @return string HTML шорткода или пустая строка если карточка не найдена
- */
-function gp_render_shortcode_by_index($index = 0) {
-    // Получаем данные демо-карточки
-    $demo_card = gp_get_demo_card($index);
-
-    // Если карточка не найдена — возвращаем пустую строку (без ошибок)
-    if (!$demo_card) {
-        return '';
+        // Если карточка не найдена — возвращаем пустоту
+        if (!$demo_card) {
+            return '';
+        }
     }
 
     // Сохраняем карточку в переменную для использования в шаблоне
@@ -209,7 +212,7 @@ function gp_render_shortcode_by_index($index = 0) {
 }
 
 // Поддержка шорткодов с дефисом: [game_preview-1], [game_preview-2], ...
-// WordPress не регистрирует такие теги напрямую, поэтому преобразуем их в [game_preview index="N"].
+// Преобразуем их в [game_preview index="N"].
 add_filter('the_content', 'gp_expand_demo_shortcodes', 9);
 function gp_expand_demo_shortcodes($content)
 {
