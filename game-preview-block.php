@@ -201,9 +201,12 @@ function gp_render_shortcode_by_index($index = 0) {
 }
 
 // Регистрируем дополнительные шорткоды [game_preview-1], [game_preview-2], и т.д.
+// [game_preview-1] = индекс 0 (первая карточка)
+// [game_preview-2] = индекс 1 (вторая карточка)
+// и т.д.
 for ($i = 1; $i <= 20; $i++) {
     add_shortcode('game_preview-' . $i, function() use ($i) {
-        return gp_render_shortcode_by_index($i);
+        return gp_render_shortcode_by_index($i - 1);
     });
 }
 
