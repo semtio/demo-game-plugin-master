@@ -98,7 +98,7 @@ function crb_attach_plugin_options()
 
                     // Кнопка назад
                     Field::make('text', 'btn_back_to', __('Кнопка назад (btn_back_to)'))
-                ])->set_header_template(__('Demo #<%- $_index + 1 %> — шорткод: <code><% if ($_index === 0) { %>[game_preview] / [game_preview-1]<% } else { %>[game_preview-<%- $_index + 1 %>]<% } %></code>'))
+                ])->set_header_template(__('Demo #<%- $_index + 1 %> — шорткод: <% if ($_index === 0) { %>[game_preview-1]<% } else { %>[game_preview-<%- $_index + 1 %>]<% } %>'))
                 ->set_collapsed(true),
 
             // ============================================
@@ -224,7 +224,7 @@ function crb_attach_plugin_options()
                         ])
                         ->set_collapsed(true),
                 ])
-                ->set_header_template(__('Table #<%- $_index + 1 %> — шорткод: <code>[table_block-<%- $_index + 1 %>]</code>'))
+                ->set_header_template(__('Table #<%- $_index + 1 %> — шорткод: [table_block-<%- $_index + 1 %>]'))
                 ->set_collapsed(true),
 
             // ===== ОБРАТНАЯ СОВМЕСТИМОСТЬ =====
