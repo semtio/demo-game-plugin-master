@@ -1,0 +1,128 @@
+.saintsmedia-author-block {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    /* background-color: #f4f7ff; */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.saintsmedia-author-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.saintsmedia-author-photo {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.saintsmedia-author-name h2 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #2e3a59;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.saintsmedia-author-name:hover,
+.saintsmedia-author-name:focus {
+    color: #0057ff;
+}
+
+.saintsmedia-author-role {
+    font-size: 0.9rem;
+}
+
+.saintsmedia-author-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.saintsmedia-author-contact {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1.5rem !important;
+}
+
+.saintsmedia-author-contact a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #e6ecff;
+    color: #2e3a59;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.saintsmedia-author-contact a:not(:first-child) {
+    margin-left: 0.5rem !important;
+}
+
+.saintsmedia-author-contact i {
+    font-size: 1rem;
+}
+
+.saintsmedia-author-contact a:hover,
+.saintsmedia-author-contact a:focus {
+    background-color: #cdd9ff;
+}
+
+.saintsmedia-proven-specialist {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.saintsmedia-proven-specialist i {
+    margin-right: 0.5rem;
+    font-size: 20px;
+}
+
+/* Responsive behavior */
+@media (min-width: 1025px) {
+    .saintsmedia-author-info {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .saintsmedia-author-contact {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .saintsmedia-author-header {
+        flex-direction: column;
+    }
+
+    .saintsmedia-proven-specialist i {
+        margin-right: 0.5rem;
+    }
+
+    .saintsmedia-author-role {
+        text-align: center;
+    }
+
+    .saintsmedia-author-contact {
+        justify-content: center;
+        margin-top: 1.rem;
+    }
+}
