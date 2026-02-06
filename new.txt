@@ -1,0 +1,278 @@
+<style>
+
+/* Контейнер отзывов */
+.sm-reviews {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Карточка отзыва */
+.sm-review {
+    background: #110732;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 20px;
+    border: 1px solid #333;
+}
+
+/* Avatar */
+.sm-review-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+/* Content */
+.sm-review-content {
+    flex: 1;
+}
+
+.sm-review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.sm-review-name {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.sm-review-date {
+    font-size: 13px;
+    color: #a0a0a0;
+}
+
+/* Stars */
+.sm-review-stars svg {
+    width: 18px;
+    height: 18px;
+    margin-left: 2px;
+}
+
+.sm-star-full {
+    fill: #ffd700;
+}
+
+.sm-star-empty {
+    fill: #444;
+}
+
+/* Text */
+.sm-review-text {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #d0d0d0;
+    max-height: 70px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.3s;
+}
+
+.sm-review-text.sm-expanded {
+    max-height: none;
+}
+
+/* Button */
+.sm-read-more {
+    margin-top: 8px;
+    background: none;
+    border: none;
+    color: #5dade2;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.sm-read-more:hover {
+    text-decoration: underline;
+    color: #85c1e2;
+}
+
+
+</style>
+
+<div class="sm-reviews" id="sm-reviews"></div>
+
+<script>
+
+    /* ======================
+       ДАННЫЕ
+    ====================== */
+
+    const reviewsData = [
+
+        {
+            name: "Michael",
+            date: "Jan 21, 2026",
+            rating: 5,
+            avatar: "/review-peoples/18.webp",
+            text: "highlights that payments arrived as expected after verification and emphasizes the larger-than-expected game library. His feedback reflects a common trend: once KYC is completed, transactions tend to proceed without further complications."
+        },
+         {
+            name: "Anna",
+            date: "Jan 17, 2025",
+            rating: 4,
+            avatar: "/review-peoples/1.webp",
+            text: "focuses on mobile usability and support responsiveness. Her comment about bonus wagering being confusing at first but clearly explained in the terms mirrors many balanced reviews — initial friction followed by understanding once rules are reviewed."
+        },
+         {
+            name: "David",
+            date: "Jan 1, 2025",
+            rating: 5,
+            avatar: "/review-peoples/40.webp",
+            text: "emphasizes withdrawal smoothness post-verification and stable performance during peak hours. This reinforces the idea that technical infrastructure remains consistent even when traffic is high."
+        },
+         {
+            name: "Sophie",
+            date: "Dec 29, 2025",
+            rating: 4,
+            avatar: "/review-peoples/39.webp",
+            text: "mentions longer verification than expected but confirms normal operation afterward. This pattern appears frequently: frustration during onboarding, followed by stable long-term use."
+        },
+         {
+            name: "Lucas",
+            date: "Dec 14, 2025",
+            rating: 5,
+            avatar: "/review-peoples/48.webp",
+            text: "highlights crypto deposits and fast balance updates, pointing to positive experiences among players who prefer digital currencies and streamlined transactions."
+        },
+         {
+            name: "Daniel",
+            date: "Nov 30, 2025",
+            rating: 4,
+            avatar: "/review-peoples/68.webp",
+            text: "provides a pragmatic view, noting that bonuses are acceptable when rules are understood and that support delivered clear answers. His review reflects cautious approval rather than blind enthusiasm."
+        },
+    ];
+
+
+    /* ======================
+       SVG ЗВЕЗДА
+    ====================== */
+
+    function createStar(filled = true) {
+
+        return `
+    <svg viewBox="0 0 576 512">
+        <path class="${filled ? 'sm-star-full' : 'sm-star-empty'}"
+        d="M381.2 150.3L524.9 171.5C569.3 178.1 586.7 231.1 554.7 262.8L449.8 366.3L475.2 509.5C482.9 553.8 436.5 587.5 397.8 566.6L288 510.8L178.2 566.6C139.5 587.5 93.1 553.8 100.8 509.5L126.2 366.3L21.3 262.8C-10.7 231.1 6.7 178.1 51.1 171.5L194.8 150.3L259.9 17.8C279.4 -22.6 336.6 -22.6 356.1 17.8L381.2 150.3Z"/>
+    </svg>`;
+    }
+
+
+    /* ======================
+       ГЕНЕРАЦИЯ ЗВЕЗД
+    ====================== */
+
+    function renderStars(rating) {
+
+        let stars = '';
+
+        for (let i = 1; i <= 5; i++) {
+
+            if (i <= rating) {
+                stars += createStar(true);
+            } else {
+                stars += createStar(false);
+            }
+        }
+
+        return stars;
+    }
+
+
+    /* ======================
+       РЕНДЕР ОТЗЫВОВ
+    ====================== */
+
+    function renderReviews() {
+
+        const container = document.getElementById('sm-reviews');
+
+        reviewsData.forEach((review, index) => {
+
+            const reviewEl = document.createElement('div');
+            reviewEl.className = 'sm-review';
+
+            reviewEl.innerHTML = `
+
+                <div class="sm-review-avatar" style="background-image:url('${review.avatar}')">
+                </div>
+
+            <div class="sm-review-content">
+
+                <div class="sm-review-top">
+
+                    <div>
+                        <div class="sm-review-name">${review.name}</div>
+                        <div class="sm-review-date">${review.date}</div>
+                    </div>
+
+                    <div class="sm-review-stars">
+                        ${renderStars(review.rating)}
+                    </div>
+
+                </div>
+
+                <div class="sm-review-text" id="sm-text-${index}">
+                    ${review.text}
+                </div>
+
+                <button class="sm-read-more" id="sm-btn-${index}">
+                        Показать полностью
+                </button>
+
+            </div>
+        `;
+
+            container.appendChild(reviewEl);
+
+            setupReadMore(index);
+        });
+    }
+
+
+    /* ======================
+       КНОПКА "ПОКАЗАТЬ"
+    ====================== */
+
+    function setupReadMore(index) {
+
+        const text = document.getElementById(`sm-text-${index}`);
+        const btn = document.getElementById(`sm-btn-${index}`);
+
+        // Проверяем — обрезан ли текст
+        if (text.scrollHeight <= 70) {
+            btn.style.display = 'none';
+            return;
+        }
+
+        btn.addEventListener('click', () => {
+
+            text.classList.toggle('sm-expanded');
+
+            btn.textContent =
+                text.classList.contains('sm-expanded')
+                    ? 'Скрыть'
+                    : 'Показать полностью';
+        });
+    }
+
+
+    /* ======================
+       ЗАПУСК
+    ====================== */
+
+    renderReviews();
+
+</script>

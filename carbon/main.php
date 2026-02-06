@@ -29,6 +29,7 @@ function crb_attach_plugin_options()
             <h3>Експерт: <b class="saintsmedia-dedicated">[expert_author]</b></h3>
             <h3>Аккордион: <b class="saintsmedia-dedicated">[saintsmedia_accordion]</b></h3>
             <h3>Витрина Слотов: <b class="saintsmedia-dedicated">[slots_showcase]</b></h3>
+            <h3>Отзывы: <b class="saintsmedia-dedicated">[sm_reviews]</b></h3>
 
             <br>
             <hr>
@@ -365,6 +366,73 @@ function crb_attach_plugin_options()
                     Field::make('rich_text', 'slot_showcase_article', __('Заголовок'))
                         ->set_width(60)
                 ])->set_collapsed(true), // true для развёрнуто всегда
+        ]);
+
+    // ----------------------------------------------
+    // ---------------- 6 Отзывы --------------------
+    // ----------------------------------------------
+
+    Container::make('theme_options', 'Отзывы')
+        ->set_page_parent('crb_demo_game')
+        ->add_fields([
+            Field::make('complex', 'reviews_lists', __('Списки отзывов'))
+                ->add_fields([
+                    Field::make('separator', 'review_styles', __('Стили карточек')),
+
+                    Field::make('color', 'review_border_color', __('Цвет обводки'))
+                        ->set_width(33)
+                        ->set_default_value('#333')
+                        ->set_palette(array('#333')),
+
+                    Field::make('color', 'review_bg_color', __('Цвет фона карточки'))
+                        ->set_width(33)
+                        ->set_default_value('#110732')
+                        ->set_palette(array('#110732')),
+
+                    Field::make('color', 'review_text_color', __('Цвет текста'))
+                        ->set_width(33)
+                        ->set_default_value('#d0d0d0')
+                        ->set_palette(array('#d0d0d0')),
+
+                    Field::make('separator', 'review_buttons', __('Кнопки')),
+
+                    Field::make('text', 'review_btn_show', __('Текст кнопки "Показать"'))
+                        ->set_width(50)
+                        ->set_default_value('Show more'),
+
+                    Field::make('text', 'review_btn_hide', __('Текст кнопки "Скрыть"'))
+                        ->set_width(50)
+                        ->set_default_value('Hide'),
+
+                    Field::make('separator', 'review_items_separator', __('Отзывы')),
+
+                    Field::make('complex', 'reviews_items', __('Отзывы'))
+                        ->add_fields([
+                            Field::make('text', 'review_name', __('Имя'))
+                                ->set_width(33),
+
+                            Field::make('text', 'review_date', __('Дата'))
+                                ->set_width(33),
+
+                            Field::make('text', 'review_rating', __('Рейтинг (1-5)'))
+                                ->set_width(33)
+                                ->set_attribute('type', 'number')
+                                ->set_attribute('min', '1')
+                                ->set_attribute('max', '5')
+                                ->set_attribute('step', '1'),
+
+                            Field::make('image', 'review_avatar', __('Аватар'))
+                                ->set_value_type('url')
+                                ->set_width(50),
+
+                            Field::make('textarea', 'review_text', __('Текст отзыва'))
+                                ->set_rows(4)
+                                ->set_width(100),
+                        ])
+                        ->set_collapsed(true),
+                ])
+                ->set_header_template(__('Список #<%- $_index + 1 %> — шорткод: [sm_reviews-<%- $_index + 1 %>]'))
+                ->set_collapsed(true),
         ]);
 }
 

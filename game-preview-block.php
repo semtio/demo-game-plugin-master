@@ -430,6 +430,101 @@ function slots_showcase__short()
     return ob_get_clean();
 }
 
+// ================= ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ДЛЯ ОТЗЫВОВ =================
+
+/**
+ * Получить все списки отзывов
+ *
+ * @return array Массив списков отзывов
+ */
+function gp_get_all_reviews_lists()
+{
+    $reviews = carbon_get_theme_option('reviews_lists');
+
+    if (!empty($reviews) && is_array($reviews)) {
+        return array_values($reviews);
+    }
+
+    return [];
+}
+
+/**
+ * Получить список отзывов по индексу (0-based)
+ *
+ * @param int $index
+ * @return array|null
+ */
+function gp_get_reviews_by_index($index = 0)
+{
+    $reviews = gp_get_all_reviews_lists();
+    return isset($reviews[$index]) ? $reviews[$index] : null;
+}
+
+// ================= ШОРТКОДЫ ОТЗЫВОВ =================
+
+// Глобальный счётчик для генерации уникальных instance ID
+if (!isset($GLOBALS['reviews_instance_counter'])) {
+    $GLOBALS['reviews_instance_counter'] = 0;
+}
+
+/**
+ * Шорткод [sm_reviews]
+ *
+ * Примеры:
+ * [sm_reviews index="1"] — первый список отзывов
+ * [sm_reviews index="2"] — второй список отзывов
+ * [sm_reviews-1] — первый список отзывов (альтернативный синтаксис)
+ */
+add_shortcode('sm_reviews', 'sm_reviews__short');
+function sm_reviews__short($atts = [])
+{
+    $atts = shortcode_atts([
+        'index' => 1,
+    ], $atts, 'sm_reviews');
+
+    $index = max(1, (int) $atts['index']);
+    $reviews_data = gp_get_reviews_by_index($index - 1);
+
+    if (!$reviews_data) {
+        return '';
+    }
+
+    // Генерируем уникальный instance ID
+    $GLOBALS['reviews_instance_counter']++;
+    $instance_id = 'sm-reviews-instance-' . $GLOBALS['reviews_instance_counter'];
+
+    // Передаём данные в шаблон
+    $GLOBALS['reviews_data'] = $reviews_data;
+    $GLOBALS['reviews_instance_id'] = $instance_id;
+
+    ob_start();
+    include plugin_dir_path(__FILE__) . 'templates/reviews.php';
+    $html = ob_get_clean();
+
+    // Очищаем глобальные переменные
+    unset($GLOBALS['reviews_data']);
+    unset($GLOBALS['reviews_instance_id']);
+
+    return $html;
+}
+
+// Поддержка шорткодов с дефисом: [sm_reviews-1], [sm_reviews-2], ...
+// Преобразуем их в [sm_reviews index="N"].
+add_filter('the_content', 'gp_expand_reviews_shortcodes', 9);
+function gp_expand_reviews_shortcodes($content)
+{
+    return preg_replace_callback('/\[sm_reviews-(\d+)([^\]]*)\]/', function ($matches) {
+        $index = (int) $matches[1];
+        $tail = trim($matches[2] ?? '');
+
+        if ($index < 1) {
+            $index = 1;
+        }
+
+        return '[sm_reviews index="' . $index . '"' . ($tail ? ' ' . $tail : '') . ']';
+    }, $content);
+}
+
 // ================= Schema JSON-LD queue/print =================
 // Хранилище для JSON-LD схем плагина (во избежание дублей)
 if (!function_exists('gp_set_expert_schema')) {
